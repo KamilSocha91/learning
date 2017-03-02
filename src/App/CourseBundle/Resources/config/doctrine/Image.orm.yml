@@ -1,0 +1,11 @@
+App\CourseBundle\Entity\Image:
+    type: entity
+    table: null
+    repositoryClass: App\CourseBundle\Repository\ImageRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

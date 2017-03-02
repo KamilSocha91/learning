@@ -1,0 +1,22 @@
+App\CourseBundle\Entity\Question:
+    type: entity
+    table: null
+    repositoryClass: App\CourseBundle\Repository\QuestionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        type:
+            type: integer
+        name:
+            type: string
+            length: 255
+        answer:
+            type: string
+            length: 255
+        difficulty:
+            type: integer
+    lifecycleCallbacks: {  }

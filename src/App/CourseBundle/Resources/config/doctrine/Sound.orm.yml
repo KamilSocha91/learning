@@ -1,0 +1,11 @@
+App\CourseBundle\Entity\Sound:
+    type: entity
+    table: null
+    repositoryClass: App\CourseBundle\Repository\SoundRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

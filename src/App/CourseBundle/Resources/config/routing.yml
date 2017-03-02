@@ -1,0 +1,3 @@
+course:
+    path:     /course
+    defaults: { _controller: AppCourseBundle:Course:course }

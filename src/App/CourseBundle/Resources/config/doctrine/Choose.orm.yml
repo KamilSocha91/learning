@@ -1,0 +1,11 @@
+App\CourseBundle\Entity\Choose:
+    type: entity
+    table: null
+    repositoryClass: App\CourseBundle\Repository\ChooseRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    lifecycleCallbacks: {  }

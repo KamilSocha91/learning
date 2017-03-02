@@ -1,0 +1,8 @@
+app_course:
+    resource: "@AppCourseBundle/Resources/config/routing.yml"
+    prefix:   /
+
+app_dashboard:
+    resource: "@AppDashboardBundle/Resources/config/routing.yml"
+    prefix:   /
+
