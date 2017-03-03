@@ -1,3 +1,3 @@
 #!/bin/bash
 
-php bin/console assetic:dump  && rm -rf bin/cache/dev && rm -rf bin/cache/prod
+php bin/console assetic:dump  && php bin/console cache:clear && rm -rf var/cache/dev && rm -rf var/cache/prod

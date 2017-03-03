@@ -1,12 +1,8 @@
 var gulp = require('gulp'),
-	sass = sass = require('gulp-sass');
-
-	gulp.task('default', function() {
-
-	});
-
+	sass = require('gulp-sass');
+	
 	gulp.task('sass', function () {
-	    gulp.src('./src/App/TreeBundle/Resources/public/css/master.scss')
+	    gulp.src('./app/Resources/public/scss/master.scss')
 	        .pipe(sass({sourceComments: 'map'}))
-	        .pipe(gulp.dest('./src/App/TreeBundle/Resources/public/css/'));
+	        .pipe(gulp.dest('./app/Resources/public/css/'));
 	});

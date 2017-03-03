@@ -3,11 +3,30 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {% stylesheets
+                '../app/Resources/public/css/master.css'
+            %}
+            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+            {% endstylesheets %}
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('app_dashboard_homepage') }}">Dashboard</a></li>
+                    <li><a href="{{ path('course') }}">Course</a></li>
+                </ul>
+            </nav>
+        </header>
+
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+        
+        <footer>
+            footer
+        </footer>
     </body>
 </html>

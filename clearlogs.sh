@@ -1,0 +1,1 @@
+sudo rm -rf var/logs/prod.logs && sudo rm -rf var/logs/dev.logs	
