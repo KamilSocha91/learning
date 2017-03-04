@@ -1,0 +1,31 @@
+body {
+	position: relative;
+}
+img {
+  max-width:100%;
+  height:auto;
+  display:block;
+}
+.clear {
+	clear: both;
+}
+a {
+	color: #000;
+}
+ul {
+list-style-type: none;
+padding: 0;
+} 
+
+button.btn__confirm {
+@include button($b-border, $b-blue, #fff, 4px);
+}
+button.btn__delete {
+@include button($b-border, $b-red, #fff, 4px);
+}
+button.btn__load {
+@include button($b-border, $b-yellow, #fff, 4px);
+}
+button.btn__save {
+@include button($b-border, $b-green, #fff, 4px);
+}

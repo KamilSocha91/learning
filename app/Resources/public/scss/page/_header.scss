@@ -1,0 +1,102 @@
+
+header {
+	img {
+		margin: 10px 0 10px 10%;
+	}
+	a.logo {
+		display: table;
+		position: relative;
+		h1 {
+			color: $logo;
+			font-size: 22px;
+			@include transform(2, 1);
+			@include position(absolute, 30%, 10px);
+		}
+	}
+  
+	nav {
+		background: $backgroud;
+	  @include full-shadow ($light-brown, $brown);
+	  @include top-shadow ($light-brown, $brown);
+	  @include border(2px, 0, 2px, 0, $border);
+	  margin-bottom: 9px;
+		text-align: center;
+		font-size: 28px;
+		ul {
+			display: inline-flex;
+			justify-content: center;
+			li {
+				position: relative;
+				float: left;
+			}
+			li:after {
+		    content: "";
+			  background: $line;
+	      position: absolute;
+		    bottom: 20%;
+		    right: 0;
+		    height: 60%;
+		    width: 1px;
+			}
+			li:first-of-type:before {
+		    content: "";
+			  background: $line;
+	      position: absolute;
+		    bottom: 20%;
+		    left: 0;
+		    height: 60%;
+		    width: 1px;
+			}
+			a {
+				padding: 1px 12px 2px 12px;
+				display: inline-block;
+				text-decoration: none;
+				color: #000;
+			}
+			a:hover {
+				color: $hover;
+			}
+			a:active {
+				color: #fff;
+			}
+		}
+
+	}
+}
+
+@media only screen and (max-width: 800px) {
+	header {
+		nav {
+			ul {
+				display: initial;
+				li {
+					float: none;
+					border-top: 1px solid $line;
+				}
+				li:after {
+			    right: 4%;
+				}
+				li:before {
+			    content: "";
+				  background: $line;
+		      position: absolute;
+			    bottom: 20%;
+			    left: 4%;
+			    height: 60%;
+			    width: 1px;
+				}
+				li:first-of-type:before {
+			    left: 4%;
+				}
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 360px) {
+	header {
+		img {
+			margin: 10px auto;
+		}
+	}
+}

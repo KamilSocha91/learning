@@ -1,0 +1,62 @@
+
+section#bottom {
+  h3 {
+  	border-bottom: 1px solid $line;
+  	text-align: center;
+  	margin: 0 6% 15px 6%;
+  	padding: 0 0 5px 0;
+  }
+	margin-top: 60px;
+	background: $backgroud;
+  @include full-shadow ($light-brown, $brown);
+  @include border(2px, 0, 2px, 0, $border);
+  padding: 20px 4%;
+  ul:first-of-type {
+  	border-bottom: 1px solid $line;
+  }
+  ul {
+  	text-align: justify;
+  	padding: 0 10px;
+  	display: inline-block;
+  	li {
+  		img {
+  			float: left;
+				margin: 0 10px 0 0;
+  		}
+  		padding: 2%;
+			width: 45%;
+  		float: left;
+  		position: relative;
+  	}
+  	li:first-of-type:after {
+	    content: "";
+		  background: $line;
+      position: absolute;
+	    bottom: 20%;
+	    right: 0;
+	    height: 60%;
+	    width: 1px;
+		}
+  }
+
+}
+
+@media only screen and (max-width: 800px) {
+
+	section#bottom {
+		ul {
+			li {
+				border-bottom: 1px solid $line;
+				width: 100%;
+				float: none;
+			}
+			li:first-of-type:after {
+				display: none;
+			}
+			li:last-of-type {
+				border-bottom: none;
+			}
+		}
+	}
+
+}

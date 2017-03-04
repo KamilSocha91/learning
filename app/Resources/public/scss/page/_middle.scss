@@ -1,0 +1,133 @@
+
+section#middle {
+  position: relative;
+  min-height: 500px;
+	background: $backgroud;
+  @include full-shadow ($light-brown, $brown);
+  @include border(2px, 0, 2px, 0, $border);
+  padding: 20px 4%;
+  text-align: justify;
+  header {
+    margin: 0 6% 15px 6%;
+    padding: 0 0 5px 0;
+    border-bottom: 1px solid $line;
+  }
+  h2 {
+    padding: 0 5px;
+    width: 50%;
+  	text-align: center;
+  }
+  h3 {
+    display: inline; 
+  }
+  p {
+    display: inline;
+  }
+  .footer {
+  	border-top: 1px solid $line;
+  	text-align: center;
+    padding: 10px 0 0;
+    margin: 15px 6%;
+    position: absolute;
+    bottom: 0px;
+    width: 80%;
+  }
+  div.breadcrumbs {
+    float: right;
+    margin: 5px 0px;
+    position: relative;
+    right: 7%;
+    max-width: 40%;
+  }
+  div.contact {
+    text-align: center;
+    p {
+      text-align: center;
+      margin: 10px 0 15px 0;
+    }
+    div#wpgmza_map {
+      margin-bottom: 45px;
+    }
+  }
+  article.recommended {
+    text-align: center;
+  }
+  article {
+    margin: 20px 0px 35px;
+    a {
+    img {
+          float: left;
+          margin-right: 10px;
+          border: 2px solid $border;
+        }
+    }
+    div {
+        text-align: center;
+      ul {
+        li {
+          img {
+            border: 2px solid $border;
+          }
+          display: inline-block;
+          float: none;
+        }
+      }
+    } 
+  }
+  article.blog {
+    text-align: justify;
+    div {
+      margin: 30px;
+      text-align: justify;
+      overflow: auto;
+    }
+    div:last-of-type {
+      margin: 30px 30px 60px 30px;
+    }
+    a {
+      text-decoration: none;
+    }
+    p {
+      a {
+        text-decoration: underline;
+      }
+    }
+    h3 {
+      font-weight: 900;
+      display: block;
+      text-align: left;
+      padding: 5px;
+      font-size: 24px;
+    }
+    img {
+      border: 2px solid $border;
+      float: left;
+      margin-right: 10px;
+    }
+  }
+  article.gallery {
+    text-align: center;
+    a {
+      padding: 6px 0;
+      text-decoration: none;
+    }
+    h3 {
+      display: block;
+      padding: 6px 0;
+      font-size: 24px;
+    }
+    img {
+      float: none;
+      margin: 12px 0;
+    }
+    div {
+      ul {
+        li {
+          margin: 14px;
+          display: inline-block;
+          float: none;
+        }
+      }
+    }
+  }
+}
