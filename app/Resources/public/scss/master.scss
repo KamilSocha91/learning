@@ -4,27 +4,17 @@
 @import "external/mixins"; 
 
 /* Body wrapper */
-div#content {
-  margin: 0 auto 70px;
-  @include size (80%, auto);
+
+@media only screen and (min-width: 360px) {
+
 }
 
-@media only screen and (max-width: 800px) {
-  div#content {
-    top: 40px;
-    @include size (90%, auto);
-  }
-}
+@media only screen and (min-width: 800px) {
 
-@media only screen and (max-width: 360px) {
-  div#content {
-    @include size (100%, auto);
-  }
 }
 
 /* Work files */
 @import "page/basic";
-@import "page/background";
 @import "page/header";
 @import "page/middle";
-@import "page/bottom"; 
+@import "page/footer"; 
