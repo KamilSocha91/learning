@@ -1,0 +1,17 @@
+{
+  "name": "front",
+  "homepage": "https://github.com/lim169/learning",
+  "authors": [
+    "lim169 <ksfuldrew@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

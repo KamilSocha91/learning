@@ -3,5 +3,64 @@
 {% block title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Course:course page</h1>
+	<div ng-app="courseApp">
+		<aside ng-controller="courseCtrl">
+			
+		</aside>
+	    <section ng-controller="questionCtrl">
+{# 	    	<div class="top__left">
+			<div  class="top__left-top">
+					<header><h1>Tree</h1></header>
+
+					<div class="btn">
+						<input name="jsonFile" type="file" accept=".json" on-read-file="getFile($fileContent)"/>
+			    		<button class="btn__save" ng-click="save(data)">Save Tree</button>
+			    		<button class="btn__load" ng-click="new()">New</button>
+			    	</div>
+
+					<ul>
+					    <li ng-repeat="data in tree" ng-show="tree.error == null" ng-include="'tree_item'" style="cursor:default;">
+					    	<element ng-bind="data"></element>
+					    </li>
+					</ul>
+				</div>
+
+				<div  class="top__left-bottom">
+					<header><h1>Database</h1></header>
+
+					<ul ng-hide="showList">
+						{% for data in list %}
+							<li> Tree id. {{data.id}} <button class="btn__load" ng-click="load({{data.id}})">Load</button></li>
+						{% endfor %}
+					</ul>
+
+					<ul>
+						<li ng-repeat="data in list"> Tree id. <element ng-bind="data.id"></element>
+							<button class="btn__load" ng-click="load(data.id)">Load</button> 
+						</li>
+					</ul>
+					
+				</div>
+			</div>
+			<div class="top__right">
+				<header><h1>JSON</h1></header>
+					<pre ng-bind="tree|json"></pre>
+			</div> #}
+	    </section>
+
+		<div style="clear: both;"></div>
+	</div>
+{% endblock %}
+
+{% block javascripts %}
+	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    {% javascripts 
+    	'../app/Resources/vendor/angular/angular.min.js'
+        '@AppCourseBundle/Resources/js/controller.js'
+        '@AppCourseBundle/Resources/js/directives.js'
+        '@AppCourseBundle/Resources/js/services.js'
+    %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
 {% endblock %}

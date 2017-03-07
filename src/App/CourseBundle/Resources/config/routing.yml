@@ -2,5 +2,12 @@ course:
     path:     /course
     defaults: { _controller: AppCourseBundle:Course:course }
 question:
-    path:     /question
+    path:     /question/{id}
     defaults: { _controller: AppCourseBundle:Course:question }
+    options:
+        expose: true
+answer:
+    path:     /answer/{id}
+    defaults: { _controller: AppCourseBundle:Course:answer }
+    options:
+        expose: true

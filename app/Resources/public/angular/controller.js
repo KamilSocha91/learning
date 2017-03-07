@@ -1,6 +1,4 @@
-var module = angular.module("treeApp", ['ui.sortable']);
-
-module.controller('treeCtrl', function($scope, $http, Tree) {
+module.controller('courseCtrl', function($scope, $http, Tree) {
 	$scope.new = function() {
 		Tree.clearFileInput();
 		$scope.tree = [{id: 1, name: 1, content: "", nodes: []}];
