@@ -4,11 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            {% stylesheets
-                '../app/Resources/public/css/master.css'
-            %}
-            <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-            {% endstylesheets %}
+            <link rel="stylesheet" type="text/css" media="screen" href="/css/master.css"/>
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -28,7 +24,8 @@
 
         {% block body %}{% endblock %}
 
-    {% block javascripts %}{% endblock %}
-        
+    {% block javascripts %}
+    {% endblock %}
+
     </body>
 </html>

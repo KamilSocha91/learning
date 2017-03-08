@@ -3,12 +3,12 @@
 {% block title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block body %}
-	<div ng-app="courseApp">
+{# 	<div ng-app="courseApp"> #}
 		<aside ng-controller="courseCtrl">
 			
 		</aside>
-	    <section ng-controller="questionCtrl">
-{# 	    	<div class="top__left">
+	    <section>
+	    	<div class="top__left">
 			<div  class="top__left-top">
 					<header><h1>Tree</h1></header>
 
@@ -29,9 +29,9 @@
 					<header><h1>Database</h1></header>
 
 					<ul ng-hide="showList">
-						{% for data in list %}
+			{# 			{% for data in list %}
 							<li> Tree id. {{data.id}} <button class="btn__load" ng-click="load({{data.id}})">Load</button></li>
-						{% endfor %}
+						{% endfor %} #}
 					</ul>
 
 					<ul>
@@ -45,22 +45,16 @@
 			<div class="top__right">
 				<header><h1>JSON</h1></header>
 					<pre ng-bind="tree|json"></pre>
-			</div> #}
+			</div>
 	    </section>
 
 		<div style="clear: both;"></div>
-	</div>
+{# 	</div> #}
 {% endblock %}
 
-{% block javascripts %}
-	<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-	<script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-    {% javascripts 
-    	'../app/Resources/vendor/angular/angular.min.js'
-        '@AppCourseBundle/Resources/js/controller.js'
-        '@AppCourseBundle/Resources/js/directives.js'
-        '@AppCourseBundle/Resources/js/services.js'
-    %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
+    {% block javascripts %}
+    	<script src="{{ asset('vendor/angular/angular.min.js') }}"></script>
+        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+        <script type="text/javascript" data-main="{{ asset('js/course')}}" src="/vendor/requirejs/require.js"></script>
+    {% endblock %}

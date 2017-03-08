@@ -1,4 +1,4 @@
-module.service( 'Tree', function($http) {
+learningApp.service( 'Course', function($http) {
 	this.load = function (id) {
 		return  $http({ 
 	    	method: 'GET', 

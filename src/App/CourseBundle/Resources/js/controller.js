@@ -1,6 +1,17 @@
-var module = angular.module("courseApp");
+/*var learningApp = angular.module("courseApp", []);*/
 
-module.controller('courseCtrl', function($scope, $http, Tree) {
+define([], function () {
+  console.log('tetst');
+    var myController = function ($scope) {
+        $scope.message = "RequireJs Integrated successfully";
+    };
+
+    myController.$inject = ['$scope'];
+
+    return myController;
+});
+
+/*learningApp.controller('courseCtrl', function($scope, $http, Course) {
 	$scope.new = function() {
 		Tree.clearFileInput();
 		$scope.tree = [{id: 1, name: 1, content: "", nodes: []}];
@@ -40,4 +51,4 @@ module.controller('courseCtrl', function($scope, $http, Tree) {
   $scope.getFile = function($fileContent) {
 		$scope.tree = Tree.validJSON($fileContent);
   };
-});
+});*/
