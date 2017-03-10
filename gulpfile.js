@@ -17,9 +17,15 @@ var gulp = require('gulp'),
 	        .pipe(gulp.dest('./web/css/'));
 	});
 
-	gulp.task('js', function (cb) {
+	gulp.task('js', function () {
+	    gulp.src('./app/Resources/public/js/**/*.js')
+	        .pipe(gulp.dest('./web/js/'));
+	});
+
+
+	gulp.task('js-minify', function (cb) {
 	  pump([
-	        gulp.src('./web/js/*.js'),
+	        gulp.src('./app/Resources/public/js/*.js'),
 	        uglify(),
 	        gulp.dest('./web/js/')
 	    ],
