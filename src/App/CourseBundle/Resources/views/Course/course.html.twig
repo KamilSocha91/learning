@@ -3,8 +3,8 @@
 {% block title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block body %}
-{# 	<div ng-app="courseApp"> #}
-		<aside ng-controller="courseCtrl">
+	<div>
+		<aside ng-controller="MyCtrl1">
 			
 		</aside>
 	    <section>
@@ -49,12 +49,12 @@
 	    </section>
 
 		<div style="clear: both;"></div>
-{# 	</div> #}
+	</div>
 {% endblock %}
 
     {% block javascripts %}
-    	<script src="{{ asset('vendor/angular/angular.min.js') }}"></script>
+    	
         <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
         <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <script type="text/javascript" data-main="{{ asset('js/course')}}" src="/vendor/requirejs/require.js"></script>
+        <script type="text/javascript" data-main="{{ asset('js/config')}}" src="/vendor/requirejs/require.js"></script>
     {% endblock %}

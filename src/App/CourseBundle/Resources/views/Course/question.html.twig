@@ -1,7 +1,12 @@
-{% extends "::base.html.twig" %}
+<section>
+	<header>
+		<h1>Pytanie</h1>
+	</header>
 
-{% block title %}{{ 'layout.title'|trans }}{% endblock %}
-
-{% block body %}
-<h1>Welcome to the Course:course page</h1>
-{% endblock %}
+	<form>
+		<fieldset>
+			<textarea class="question"></textarea>
+			<textarea class="answer"></textarea>
+		</fieldset>
+	</form>
+</section>

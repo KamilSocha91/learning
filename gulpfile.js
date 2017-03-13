@@ -1,7 +1,8 @@
+'use strict';
 var gulp = require('gulp'),
 	sass = require('gulp-sass'),
 	cleanCSS = require('gulp-clean-css'),
-	uglify = require('gulp-uglify');
+	uglify = require('gulp-uglify'),
 	pump = require('pump');
 	
 	gulp.task('sass', function () {
