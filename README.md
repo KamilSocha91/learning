@@ -6,11 +6,27 @@ Personal leraning Application
 
 PHP Symfony2, Angular,
 
+JacaScripts structures
+=================
 
-
-
-
-
+app/Resources/public/js/
+config.js
+  require js libraries, runs bootstrap.js
+bootsrap.js
+  bootstrap angular components, runs app.js
+app.js
+  define angular components
+routes.js
+  define angular routing #to_do
+/controller/
+/directives/
+/filters/
+/services/
+  module.js
+    define angular, run angular module
+  index.js 
+    define files example. ctrl's
+  files which runs files
 
 
 

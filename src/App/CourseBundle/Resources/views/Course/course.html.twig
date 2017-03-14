@@ -4,8 +4,15 @@
 
 {% block body %}
 	<div>
-		<aside ng-controller="MyCtrl1">
-			
+		<aside ng-controller="courseCtrl">
+			test
+			<pre ng-bind="message"></pre>
+			  <p>Name : <input type="text" ng-model="name"></p>
+  <h1 ng-bind="name">Hello </h1>
+
+  <div ng-init="myText='Hello World!'">
+
+<p ng-bind="myText"></p>
 		</aside>
 	    <section>
 	    	<div class="top__left">

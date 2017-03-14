@@ -8,7 +8,7 @@ define([
     'routes'
 ], function (require, ng) {
     'use strict';
-console.log('bootstrap');
+
     require(['domReady!'], function (document) {
         ng.bootstrap(document, ['app']);
     });

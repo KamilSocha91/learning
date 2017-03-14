@@ -12,13 +12,6 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests",
-    "web/vendor"
-  ],
-  "dependencies": {
-    "angularAMD": "^0.2.1",
-    "angular-route": "^1.6.3",
-    "requirejs": "^2.3.3",
-    "domReady": "requirejs-domready#^2.0.1"
-  }
+    "tests"
+  ]
 }
