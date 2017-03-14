@@ -1,1 +1,0 @@
-requirejs(["controller"], function(controller) {});
