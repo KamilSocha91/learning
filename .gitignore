@@ -1,5 +1,7 @@
 vendor/
 node_modules/
+var/
+web/
 var/cache
 var/logs
 var/sessions
