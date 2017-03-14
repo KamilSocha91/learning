@@ -3,65 +3,30 @@
 {% block title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block body %}
-	<div>
-		<aside ng-controller="courseCtrl">
-			test
-			<pre ng-bind="message"></pre>
-			  <p>Name : <input type="text" ng-model="name"></p>
-  <h1 ng-bind="name">Hello </h1>
+<div ng-controller="courseCtrl">
 
-  <div ng-init="myText='Hello World!'">
+	<aside>
+		<header>
+			<h1>{{ 'course.title'|trans }}</h1>
+			<p>{{'course.description'|trans}}:</p>
+		</header>
 
-<p ng-bind="myText"></p>
-		</aside>
-	    <section>
-	    	<div class="top__left">
-			<div  class="top__left-top">
-					<header><h1>Tree</h1></header>
+		<ul>
+			<li class="course clear__float" ng-repeat="data in list">
+				<cite ng-bind="data"></cite>
+				<button class="btn__load" ng-click="load(data.id)">{{'course.btn.load'|trans}}</button>
+			</li>
+		</ul>
+	</aside>
 
-					<div class="btn">
-						<input name="jsonFile" type="file" accept=".json" on-read-file="getFile($fileContent)"/>
-			    		<button class="btn__save" ng-click="save(data)">Save Tree</button>
-			    		<button class="btn__load" ng-click="new()">New</button>
-			    	</div>
+  <section class="course">
+		<header>
+			<h2>{{ 'course.create.title'|trans }}</h2>
+			<p>{{'course.create.description'|trans}}:</p>
+			<button class="btn__confirm" ng-click="load(data.id)">{{'course.btn.create'|trans}}</button>
+		</header>
 
-					<ul>
-					    <li ng-repeat="data in tree" ng-show="tree.error == null" ng-include="'tree_item'" style="cursor:default;">
-					    	<element ng-bind="data"></element>
-					    </li>
-					</ul>
-				</div>
+  </section>
 
-				<div  class="top__left-bottom">
-					<header><h1>Database</h1></header>
-
-					<ul ng-hide="showList">
-			{# 			{% for data in list %}
-							<li> Tree id. {{data.id}} <button class="btn__load" ng-click="load({{data.id}})">Load</button></li>
-						{% endfor %} #}
-					</ul>
-
-					<ul>
-						<li ng-repeat="data in list"> Tree id. <element ng-bind="data.id"></element>
-							<button class="btn__load" ng-click="load(data.id)">Load</button> 
-						</li>
-					</ul>
-					
-				</div>
-			</div>
-			<div class="top__right">
-				<header><h1>JSON</h1></header>
-					<pre ng-bind="tree|json"></pre>
-			</div>
-	    </section>
-
-		<div style="clear: both;"></div>
-	</div>
+</div>
 {% endblock %}
-
-    {% block javascripts %}
-    	
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <script type="text/javascript" data-main="{{ asset('js/config')}}" src="/vendor/requirejs/require.js"></script>
-    {% endblock %}

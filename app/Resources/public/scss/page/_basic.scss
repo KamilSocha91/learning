@@ -17,6 +17,11 @@ ul {
 	list-style-type: none;
 	padding: 0;
 } 
+.clear__float:after {
+    content: '';
+    display: block;
+    clear: both;
+}
 
 button.btn__confirm {
 	@include button($b-border, $b-blue, #fff, 4px);
@@ -25,8 +30,14 @@ button.btn__delete {
 	@include button($b-border, $b-red, #fff, 4px);
 }
 button.btn__load {
-	@include button($b-border, $b-yellow, #fff, 4px);
+	@include button($b-border, $b-yellow, #333, 4px);
 }
 button.btn__save {
 	@include button($b-border, $b-green, #fff, 4px);
+}
+button:hover {
+  border: 2px solid $hover;
+}
+button:active {
+  padding: 4px 8px;
 }

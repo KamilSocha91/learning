@@ -8,3 +8,28 @@ fieldset {
 	width: 60%;
 	margin: 0 auto;
 }
+aside {
+	width: 20%;
+	float: left;
+}
+section.course {
+	width: 67%;
+	float: left;
+}
+aside, section.course {
+	border: 2px solid $line;
+	padding: 2%;
+	margin: 1%;
+}
+li.course {
+	margin:10px 0;
+	button {
+    float: right;
+    width: 30%;
+	}
+	cite {
+	  width: 60%;
+	  float: left;
+	}
+}
+

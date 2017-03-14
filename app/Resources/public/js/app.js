@@ -1,16 +1,16 @@
 define([
-    'angular',
-    './controllers/index'/*,
-    './directives/index',
-    './filters/index',
-    './services/index'*/
+  'angular',
+  './controllers/index'/*,
+  './directives/index',
+  './filters/index',
+  './services/index'*/
 ], function (ng) {
-    'use strict';
+  'use strict';
 
-    return ng.module('app', [
-        'app.controllers'/*,
-        'app.services',
-        'app.filters',
-        'app.directives'*/
-    ]);
+  return ng.module('app', [ 
+      'app.controllers'/*,
+      'app.services',
+      'app.filters',
+      'app.directives'*/
+  ]);
 });

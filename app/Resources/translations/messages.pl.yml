@@ -1,1 +1,12 @@
-layout.title : Kurs
+layout:
+  title: Kurs
+
+course:
+  courses: Kursy
+  description: Wybierz kurs
+  create: 
+    title: Utwórz kurs
+    description: Create your own personal course
+  btn:
+    create: Utwórz
+    load: Wczytaj
