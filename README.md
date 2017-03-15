@@ -6,27 +6,44 @@ Personal leraning Application
 
 PHP Symfony2, Angular,
 
-JacaScripts structures
+JavaScripts structures
 =================
 
+```sh
 app/Resources/public/js/
+```
+```sh
 config.js
-  require js libraries, runs bootstrap.js
+```
+  - require js libraries, runs bootstrap.js
+```sh
 bootsrap.js
-  bootstrap angular components, runs app.js
+```
+  - bootstrap angular components, runs app.js
+```sh
 app.js
-  define angular components
+```
+  - define angular components
+```sh
 routes.js
-  define angular routing #to_do
+```
+  - define angular routing #to_do
+```sh
 /controller/
 /directives/
 /filters/
 /services/
-  module.js
-    define angular, run angular module
-  index.js 
-    define files example. ctrl's
-  files which runs files
+```
+```sh
+module.js
+```
+- define angular, run angular module
+```sh
+index.js 
+```
+- define files example: ctrl's
+
+
 
 
 
