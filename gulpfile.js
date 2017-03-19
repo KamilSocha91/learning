@@ -6,30 +6,49 @@ var gulp = require('gulp'),
 	pump = require('pump');
 	
 	gulp.task('sass', function () {
-	    gulp.src('./app/Resources/public/scss/master.scss')
-	        .pipe(sass({sourceComments: 'map'}))
-	        .pipe(gulp.dest('./web/css/'));
+    gulp.src('./app/Resources/public/scss/master.scss')
+      .pipe(sass({sourceComments: 'map'}))
+      .pipe(gulp.dest('./web/css/'));
 	});
 
 	gulp.task('minify', function () {
-	    gulp.src('./app/Resources/public/scss/master.scss')
-	        .pipe(sass({sourceComments: 'map'}))
-	        .pipe(cleanCSS({compatibility: 'ie8'}))
-	        .pipe(gulp.dest('./web/css/'));
+		gulp.src('./app/Resources/public/scss/master.scss')
+		  .pipe(sass({sourceComments: 'map'}))
+		  .pipe(cleanCSS({compatibility: 'ie8'}))
+		  .pipe(gulp.dest('./web/css/'));
 	});
 
 	gulp.task('js', function () {
-	    gulp.src('./app/Resources/public/js/**/*.js')
-	        .pipe(gulp.dest('./web/js/'));
+		gulp.src('./app/Resources/public/js/**/*.js')
+		  .pipe(gulp.dest('./web/js/'));
 	});
-
 
 	gulp.task('js-minify', function (cb) {
 	  pump([
-	        gulp.src('./app/Resources/public/js/*.js'),
-	        uglify(),
-	        gulp.dest('./web/js/')
+        gulp.src('./app/Resources/public/js/*.js'),
+        uglify(),
+        gulp.dest('./web/js/')
 	    ],
 	    cb
 	  );
 	});
+
+	gulp.task('sass:watch', function () {
+	  gulp.watch('./app/Resources/public/scss/master.scss')
+	  	.pipe(sass({sourceComments: 'map'}))
+      .pipe(gulp.dest('./web/css/'));
+	});
+
+	gulp.task('js:watch', function () {
+	  gulp.watch('./app/Resources/public/js/**/*.js')
+		  .pipe(gulp.dest('./web/js/'));
+	});	
+
+	gulp.task('watch', function () {
+	  gulp.watch('./app/Resources/public/scss/master.scss')
+	  	.pipe(sass({sourceComments: 'map'}))
+      .pipe(gulp.dest('./web/css/'));
+    gulp.watch('./app/Resources/public/js/**/*.js')
+		  .pipe(gulp.dest('./web/js/'));
+	});
+	

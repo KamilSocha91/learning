@@ -5,7 +5,9 @@ define([
     'require',
     'angular',
     'app',
-    'routes'
+    'routes',
+    'jquery',
+    'talkify'
 ], function (require, ng) {
     'use strict';
 

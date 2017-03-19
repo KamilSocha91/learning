@@ -3,10 +3,31 @@ header {
 		text-align: center;
 	}
 }
+.question {
+  background: $shadow;
+  color: #fff;
+}
 fieldset {
-	display: inline;
-	width: 60%;
+	width: 80%;
+	border: none;
 	margin: 0 auto;
+	textarea {
+		width: 41%;
+    height: 70px;
+    padding: 2%;
+    margin: 0 2%;
+  }
+  .btn__load, .btn__save {
+    padding: 15px;
+    font-size: 20px;
+  }
+  .btn__load {
+    margin: 10px 0 0 10%;
+  }
+  .btn__save {
+    float: right;
+    margin: 10px 10% 0 0;
+  }
 }
 aside {
 	width: 20%;

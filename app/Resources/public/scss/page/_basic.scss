@@ -23,16 +23,16 @@ ul {
     clear: both;
 }
 
-button.btn__confirm {
+.btn__confirm {
 	@include button($b-border, $b-blue, #fff, 4px);
 }
-button.btn__delete {
+.btn__delete {
 	@include button($b-border, $b-red, #fff, 4px);
 }
-button.btn__load {
+.btn__load {
 	@include button($b-border, $b-yellow, #333, 4px);
 }
-button.btn__save {
+.btn__save {
 	@include button($b-border, $b-green, #fff, 4px);
 }
 button:hover {

@@ -1,3 +1,4 @@
 define([
-    './courseCtrl'
+    './courseCtrl',
+    './questionCtrl'
 ], function () {});

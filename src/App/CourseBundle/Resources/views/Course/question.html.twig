@@ -1,48 +1,17 @@
+<div ng-controller="questionCtrl">
 
-<header>
-	<h1>Pytanie</h1>
-</header>
+  <header>
+  	<h1>{{title}}</h1>
+  </header>
 
-<form>
-	<fieldset>
-		<textarea class="question"></textarea>
-		<textarea class="answer"></textarea>
-	</fieldset>
-</form>
+  <form>
+  	<fieldset>
+  		<textarea readonly class="question">{{question}}</textarea>
+  		<textarea ng-model="data.answer" class="answer"></textarea>
 
+      <button class="btn__load" ng-click="new()">{{'btn.skip'|trans}}</button>
+      <button class="btn__save" ng-click="save(data)">{{'btn.confirm'|trans}}</button>
+  	</fieldset>
+  </form>
 
-<header><h1>Tree</h1></header>
-
-<div class="btn">
-	<input name="jsonFile" type="file" accept=".json" on-read-file="getFile($fileContent)"/>
-	<button class="btn__save" ng-click="save(data)">Save Tree</button>
-	<button class="btn__load" ng-click="new()">New</button>
 </div>
-
-<ul>
-    <li ng-repeat="data in tree" ng-show="tree.error == null" ng-include="'tree_item'" style="cursor:default;">
-    	<element ng-bind="data"></element>
-    </li>
-</ul>
-</div>
-
-<div  class="top__left-bottom">
-<header><h1>Database</h1></header>
-
-<ul ng-hide="showList">
-{# 			{% for data in list %}
-		<li> Tree id. {{data.id}} <button class="btn__load" ng-click="load({{data.id}})">Load</button></li>
-	{% endfor %} #}
-</ul>
-
-<ul>
-	<li ng-repeat="data in list"> Tree id. <element ng-bind="data.id"></element>
-		<button class="btn__load" ng-click="load(data.id)">Load</button> 
-	</li>
-</ul>
-
-<div class="top__right">
-	<header><h1>JSON</h1></header>
-		<pre ng-bind="tree|json"></pre>
-</div>
-

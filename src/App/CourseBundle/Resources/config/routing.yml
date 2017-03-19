@@ -7,7 +7,7 @@ question:
     options:
         expose: true
 answer:
-    path:     /answer/{id}
+    path:     /answer
     defaults: { _controller: AppCourseBundle:Course:answer }
     options:
         expose: true

@@ -1,5 +1,7 @@
 require.config({
   paths: {
+      'jquery': '../vendor/jquery/dist/jquery.min',
+      'talkify': '../vendor/talkify/src/talkify.min',
       'domReady': '../vendor/domReady/domReady',
       'angular': '../vendor/angular/angular'/*,
       'angular-route': '../vendor/angular-route/angular-route.min'*/
@@ -9,5 +11,3 @@ require.config({
   },
   deps: ['bootstrap']
 });
-
-/*http://plnkr.co/edit/3UkSd2UXhlzOWymhLkzK?p=preview*/

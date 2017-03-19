@@ -1,4 +1,5 @@
 define([
-    './ctrl-1'/*,
-    './my-ctrl-2'*/
+    './course',
+    './question',
+    './javaScript'
 ], function () {});

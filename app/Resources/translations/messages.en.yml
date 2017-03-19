@@ -7,6 +7,9 @@ course:
   create:
     title: Create Course
     description: Create your own personal course
-  btn:
-    create: Create
-    load: Load
+btn:
+  create: Create
+  load: Load
+  start: Start
+  skip: Skip
+  confirm: Confirm

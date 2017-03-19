@@ -7,25 +7,24 @@
 
 	<aside>
 		<header>
-			<h1>{{ 'course.title'|trans }}</h1>
+			<h1>{{ 'course.create.title'|trans }}</h1>
+			<p>{{'course.create.description'|trans}}:</p>
+			<button class="btn__confirm" ng-click="load(data.id)">{{'btn.create'|trans}}</button>
+
+			<h2>{{ 'course.title'|trans }}</h2>
 			<p>{{'course.description'|trans}}:</p>
 		</header>
 
 		<ul>
 			<li class="course clear__float" ng-repeat="data in list">
-				<cite ng-bind="data"></cite>
-				<button class="btn__load" ng-click="load(data.id)">{{'course.btn.load'|trans}}</button>
+				<cite ng-bind="data.name"></cite>
+				<button class="btn__load" ng-click="start(data.id)">{{'btn.start'|trans}}</button>
 			</li>
 		</ul>
 	</aside>
 
-  <section class="course">
-		<header>
-			<h2>{{ 'course.create.title'|trans }}</h2>
-			<p>{{'course.create.description'|trans}}:</p>
-			<button class="btn__confirm" ng-click="load(data.id)">{{'course.btn.create'|trans}}</button>
-		</header>
-
+  <section class="course" data-bind-html-unsafe="course">
+  	{# load content from API #}
   </section>
 
 </div>

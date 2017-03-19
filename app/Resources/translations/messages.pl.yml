@@ -7,6 +7,9 @@ course:
   create: 
     title: Utwórz kurs
     description: Create your own personal course
-  btn:
-    create: Utwórz
-    load: Wczytaj
+btn:
+  create: Utwórz
+  load: Wczytaj
+  start: Rozpocznij
+  skip: Pomiń
+  confirm: Zatwierdź

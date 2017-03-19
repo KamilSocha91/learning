@@ -1,5 +1,4 @@
 define(['app'], function(app) {
-  console.log('controller');
   app.controller('courseCtrl', function($scope, $http, Course) {
     $scope.new = function() {
       Tree.clearFileInput();
