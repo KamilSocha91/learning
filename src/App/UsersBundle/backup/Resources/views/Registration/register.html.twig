@@ -1,0 +1,32 @@
+{% extends "::base.html.twig" %}
+
+{% form_theme form '@AppDashboard/Forms/register.html.twig' %}
+
+{% block content %}
+    {{ form_start(form, {'attr': {'class': 'm-t'}}) }}
+    {{ form_rest(form) }}
+    <button type="submit" class="btn btn-primary block full-width m-b">{{ 'register.button'|trans }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+{% block addJavaScript %}
+    {% javascripts '@AppDashboardBundle/Resources/public/js/plugins/iCheck/icheck.min.js' %}
+        <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+    <script>
+        $(document).ready(function(){
+            $('.i-checks').iCheck({
+                checkboxClass: 'icheckbox_square-green',
+                radioClass: 'iradio_square-green',
+            });
+        });
+    </script>
+{% endblock %}
+
+{% block addCSS %}
+    {% stylesheets
+    '@AppDashboardBundle/Resources/public/css/plugins/iCheck/custom.css'
+    %}
+    <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}

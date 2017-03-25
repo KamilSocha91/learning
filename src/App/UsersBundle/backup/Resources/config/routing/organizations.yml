@@ -1,0 +1,10 @@
+organizations_manage:
+    path: /manage
+    defaults:
+        _controller: AppUsersBundle:Organization:manage
+
+organizations_create:
+    path: /create
+    defaults:
+        _controller: AppUsersBundle:Organization:edit
+        organization: null

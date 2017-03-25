@@ -1,0 +1,28 @@
+App\CourseBundle\Entity\Course:
+  type: entity
+  table: course
+  repositoryClass: App\CourseBundle\Repository\CourseRepository
+  
+  oneToMany:
+    questions:
+      targetEntity: App\CourseBundle\Entity\Question
+      mappedBy: course
+  manyToOne:
+    score:
+      targetEntity: App\CourseBundle\Entity\Score
+      inversedBy: courses
+      joinColumn:
+        name: score_id
+        referencedColumnName: id
+
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    name:
+      type: string
+      length: 255
+  lifecycleCallbacks: {  }

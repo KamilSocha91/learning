@@ -3,29 +3,27 @@
 {% block title %}{{ 'layout.title'|trans }}{% endblock %}
 
 {% block body %}
-<div ng-controller="courseCtrl">
+	<div ng-controller="courseCtrl">
+		<aside>
+			<header>
+				<h1>{{ 'course.create.title'|trans }}</h1>
+				<p>{{'course.create.description'|trans}}:</p>
+				<button class="btn__confirm" ng-click="load(data.id)">{{'btn.create'|trans}}</button>
 
-	<aside>
-		<header>
-			<h1>{{ 'course.create.title'|trans }}</h1>
-			<p>{{'course.create.description'|trans}}:</p>
-			<button class="btn__confirm" ng-click="load(data.id)">{{'btn.create'|trans}}</button>
+				<h2>{{ 'course.title'|trans }}</h2>
+				<p>{{'course.description'|trans}}:</p>
+			</header>
 
-			<h2>{{ 'course.title'|trans }}</h2>
-			<p>{{'course.description'|trans}}:</p>
-		</header>
+			<ul>
+				<li class="course clear__float" ng-repeat="data in list">
+					<cite ng-bind="data.name"></cite>
+					<button class="btn__load" ng-click="start(data.id)">{{'btn.start'|trans}}</button>
+				</li>
+			</ul>
+		</aside>
 
-		<ul>
-			<li class="course clear__float" ng-repeat="data in list">
-				<cite ng-bind="data.name"></cite>
-				<button class="btn__load" ng-click="start(data.id)">{{'btn.start'|trans}}</button>
-			</li>
-		</ul>
-	</aside>
-
-  <section class="course" data-bind-html-unsafe="course">
-  	{# load content from API #}
-  </section>
-
-</div>
+	  <section class="course" data-bind-html-unsafe="course">
+	  	{# load content from API #}
+	  </section>
+	</div>
 {% endblock %}

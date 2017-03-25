@@ -1,0 +1,25 @@
+App\UsersBundle\Entity\User:
+  type: entity
+  table: fos_user
+  repositoryClass: App\UsersBundle\Repository\UserRepository
+
+  oneToMany:
+    score:
+      targetEntity: App\CourseBundle\Entity\Score
+      mappedBy: user
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    firstName:
+      type: string
+      length: 255
+      nullable: true
+    lastName:
+      type: string
+      length: 255
+      nullable: true
+  lifecycleCallbacks: {  }

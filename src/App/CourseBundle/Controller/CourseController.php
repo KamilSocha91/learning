@@ -14,6 +14,20 @@ class CourseController extends Controller
 {
   public function courseAction()
   {
+    $redis = $this->container->get('snc_redis.course');
+    $val = $redis->incr('foo:bar');
+    $key = 'new';
+    $value = [
+        'age' => 44,
+        'country' => 'finland',
+        'occupation' => 'software engineer',
+        'reknown' => 'linux kernel',
+      ];
+    $redis->set($key, json_encode($value));
+
+    dump(json_decode($redis->get($key))); 
+    dump($val);
+
       return $this->render('AppCourseBundle:Course:course.html.twig', array(
           // ...
       ));

@@ -1,0 +1,4 @@
+app_organizations:
+  resource: "@AppUsersBundle/Resources/config/routing/organizations.yml"
+  prefix: /organizations/
+

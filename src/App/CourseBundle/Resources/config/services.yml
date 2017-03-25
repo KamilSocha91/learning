@@ -1,4 +1,66 @@
+parameters:
+  #Repositories classes
+  course.repository.class: 'App\courseBundle\Repository\courseRepository'
+  question.repository.class: 'App\questionBundle\Repository\questionRepository'
+  choose.repository.class: 'App\chooseBundle\Repository\chooseRepository'
+  score.repository.class: 'App\scoreBundle\Repository\scoreRepository'
+  #Repositories entity
+  course.repository.entity: 'App\courseBundle\Entity\course'
+  question.repository.entity: 'App\questionBundle\Entity\question'
+  choose.repository.entity: 'App\chooseBundle\Entity\choose'
+  score.repository.entity: 'App\scoreBundle\Entity\score'
+  #Services classes
+  course.service.class: 'App\courseBundle\Services\courseService'
+  question.service.class: 'App\questionBundle\Services\questionService'
+  choose.service.class: 'App\chooseBundle\Services\chooseService'
+  score.service.class: 'App\scoreBundle\Services\scoreService'
+  #Forms classes
+  question.form.class: 'App\questionBundle\Form\Type\questionType'  
 services:
-#    app_course.example:
-#        class: App\CourseBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+  #Repositories
+  course.repository:
+    class: %course.repository.class%
+    public: false
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [%course.repository.entity%]
+  question.repository:
+    class: %question.repository.class%
+    public: false
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [%question.repository.entity%]
+  choose.repository:
+    class: %choose.repository.class%
+    public: false
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [%choose.repository.entity%]
+  score.repository:
+    class: %score.repository.class%
+    public: false
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [%score.repository.entity%]
+  #Services
+  course.service:
+    class: %course.service.class%
+    arguments: ['@course.repository']
+    scope: request
+  question.service:
+    class: %question.service.class%
+    arguments: ['@question.repository']
+    scope: request
+  choose.service:
+    class: %choose.service.class%
+    arguments: ['@choose.repository']
+    scope: request
+  score.service:
+    class: %score.service.class%
+    arguments: ['@score.repository']
+    scope: request
+  #Forms
+  question.form:
+    class: %question.form.class%
+    tags:
+      - { name: form.type, alias: app_erp_question }

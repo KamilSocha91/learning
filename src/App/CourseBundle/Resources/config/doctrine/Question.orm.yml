@@ -1,22 +1,41 @@
 App\CourseBundle\Entity\Question:
-    type: entity
-    table: null
-    repositoryClass: App\CourseBundle\Repository\QuestionRepository
+  type: entity
+  table: question
+  repositoryClass: App\CourseBundle\Repository\QuestionRepository
+  
+  manyToOne:
+    course:
+      targetEntity: App\CourseBundle\Entity\Course
+      inversedBy: questions
+      joinColumn:
+        name: course_id
+        referencedColumnName: id
+  oneToMany:
+    chooses:
+      targetEntity: App\CourseBundle\Entity\Choose
+      mappedBy: question
+    sounds:
+      targetEntity: App\CourseBundle\Entity\Sound
+      mappedBy: question
+    images:
+      targetEntity: App\CourseBundle\Entity\Image
+      mappedBy: question
+
+  id:
     id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    fields:
-        type:
-            type: integer
-        name:
-            type: string
-            length: 255
-        answer:
-            type: string
-            length: 255
-        difficulty:
-            type: integer
-    lifecycleCallbacks: {  }
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    type:
+      type: integer
+    name:
+      type: string
+      length: 255
+    answer:
+      type: string
+      length: 255
+    difficulty:
+      type: integer
+  lifecycleCallbacks: {  }

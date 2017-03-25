@@ -1,0 +1,33 @@
+App\CourseBundle\Entity\Score:
+  type: entity
+  table: score
+  repositoryClass: App\CourseBundle\Repository\ScoreRepository
+
+  oneToMany:
+    courses:
+      targetEntity: App\CourseBundle\Entity\Course
+      mappedBy: score
+  manyToOne:
+    user:
+      targetEntity: App\UsersBundle\Entity\User
+      inversedBy: score
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  fields:
+    write:
+      write: integer
+    sound:
+      sound: integer
+    choose:
+      choose: integer
+    image:
+      image: integer
+  lifecycleCallbacks: {  }

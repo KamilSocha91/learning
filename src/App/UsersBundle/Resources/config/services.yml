@@ -1,0 +1,20 @@
+parameters:
+  #Repositories classes
+  users.repository.class: 'App\usersBundle\Repository\usersRepository'
+  #Repositories entity
+  users.repository.entity: 'App\usersBundle\Entity\users'
+  #Services classes
+  users.service.class: 'App\usersBundle\Services\usersService'
+services:
+  #Repositories
+  users.repository:
+    class: %users.repository.class%
+    public: false
+    factory_service: doctrine.orm.entity_manager
+    factory_method: getRepository
+    arguments: [%users.repository.entity%]
+  #Services
+  users.service:
+    class: %users.service.class%
+    arguments: ['@users.repository']
+    scope: request

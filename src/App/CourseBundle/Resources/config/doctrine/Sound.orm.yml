@@ -1,11 +1,20 @@
 App\CourseBundle\Entity\Sound:
-    type: entity
-    table: null
-    repositoryClass: App\CourseBundle\Repository\SoundRepository
+  type: entity
+  table: sound
+  repositoryClass: App\CourseBundle\Repository\SoundRepository
+
+  manyToOne:
+    question:
+      targetEntity: App\CourseBundle\Entity\Question
+      inversedBy: sounds
+      joinColumn:
+        name: question_id
+        referencedColumnName: id
+
+  id:
     id:
-        id:
-            type: integer
-            id: true
-            generator:
-                strategy: AUTO
-    lifecycleCallbacks: {  }
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO   
+  lifecycleCallbacks: {  }

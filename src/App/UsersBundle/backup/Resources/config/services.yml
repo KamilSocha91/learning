@@ -1,0 +1,15 @@
+parameters:
+    my_user_provider.class: App\UsersBundle\Security\Core\User\FOSUBUserProvider
+ 
+services:
+    my_user_provider:
+        class: "%my_user_provider.class%"
+        arguments: ["@fos_user.user_manager",{facebook: facebook_id, google: google_id}, "@doctrine.orm.entity_manager"]
+    app.form.registration:
+        class: App\UsersBundle\Form\Type\RegisterType
+        tags:
+            - { name: form.type, alias: app_user_register }
+    app.form.profile:
+        class: App\UsersBundle\Form\Type\ProfileType
+        tags:
+            - { name: form.type, alias: app_user_profile }
