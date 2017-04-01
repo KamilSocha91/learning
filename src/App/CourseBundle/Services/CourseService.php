@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\CourseRepository;
+use App\CourseBundle\Repository\CourseRepository;
 use App\CourseBundle\Entity\Course;
 
 /**
@@ -50,10 +50,10 @@ class CourseService  {
      *
      * @return Course|null
      */
-    public function getAllCourses() {
-        $query = $this->courseRepository->findAllCoursesQuery();
+    public function getAll() {
+        $query = $this->courseRepository->findAll();
 
-        return $query->getArrayResult();
+        return $query;
     }
 
 }

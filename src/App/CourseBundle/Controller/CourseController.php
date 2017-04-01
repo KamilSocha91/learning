@@ -14,8 +14,14 @@ class CourseController extends Controller
 {
   public function courseAction()
   {
+    $data = [];
+    try {
+      $data['courses'] = $this->get('course.service')->getAll();
+    } catch (\Exception $e) {
+      throw new BadRequestHttpException("Unable to load courses list");
+    }
+///////////
     $redis = $this->container->get('snc_redis.course');
-    $val = $redis->incr('foo:bar');
     $key = 'new';
     $value = [
         'age' => 44,
@@ -26,20 +32,38 @@ class CourseController extends Controller
     $redis->set($key, json_encode($value));
 
     dump(json_decode($redis->get($key))); 
-    dump($val);
+/////////////
+    return $this->render('AppCourseBundle:Course:course.html.twig', $data);
 
-      return $this->render('AppCourseBundle:Course:course.html.twig', array(
-          // ...
-      ));
   }
 
+  /*
+  * 
+  *
+  *
+  */
   public function questionAction(Request $request, $id = null)
   {
+  /*  try {*/
+      $questions = $this->get('question.service')->getQuestions($id);
+      //$tree = $this->loadRootNode($nodes[0]->getId(), $treeId);
+   /* } catch (\Exception $e) {
+      throw new BadRequestHttpException("Unable to load questions");
+    }*/
+
   	$form_data = [
       'title'=>'question Controller',
-      'question'=>'Are you sure u r loooking for this?'
+      'question'=>'Are you sure u r loooking for this?',
+      'test'=>$questions
     ];
+
     return $this->render('AppCourseBundle:Course:question.html.twig', $form_data);
+
+    return $this->render('AppCourseBundle:Course:sound.html.twig', $form_data);
+
+    return $this->render('AppCourseBundle:Course:choose.html.twig', $form_data);
+
+    return $this->render('AppCourseBundle:Course:image.html.twig', $form_data);
   }
 
   public function answerAction() {

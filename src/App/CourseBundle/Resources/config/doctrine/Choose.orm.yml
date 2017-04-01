@@ -17,4 +17,8 @@ App\CourseBundle\Entity\Choose:
       id: true
       generator:
         strategy: AUTO
+  fields:
+    answer:
+      type: string
+      length: 255
   lifecycleCallbacks: {  }

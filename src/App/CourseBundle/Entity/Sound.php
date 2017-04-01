@@ -70,7 +70,7 @@ class Sound
    *
    * @param ArrayCollection $question Question instance
    *
-   * @return Node
+   * @return Sound
    */
   public function setQuestion ($question) {
       $this->question = $question;

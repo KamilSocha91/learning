@@ -70,7 +70,7 @@ class Score
    *
    * @param ArrayCollection $user User instance
    *
-   * @return Node
+   * @return Score
    */
   public function setUser ($user) {
       $this->user = $user;

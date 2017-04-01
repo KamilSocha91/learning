@@ -33,10 +33,9 @@ class User extends BaseUser
    */
   private $score;
 
-  public function __construct()
-  {
+  public function __construct() {
     parent::__construct();
-    $this->score = new ArrayCollection();
+    $this->score = new \Doctrine\Common\Collections\ArrayCollection();
   }
 
   /**

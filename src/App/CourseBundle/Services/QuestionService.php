@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\QuestionRepository;
+use App\CourseBundle\Repository\QuestionRepository;
 use App\CourseBundle\Entity\Question;
 
 /**
@@ -29,12 +29,13 @@ class QuestionService  {
     /**
      * Return questions
      *
-     * @param integer $id Question id
+     * @param integer $id Course id
      *
      * @throws \Exception
      */
     public function getQuestions($id = null) {
-        $query = $this->questionRepository->findQuestionsByQuestionId($id);
+        dump($id);
+        $query = $this->questionRepository->findByCourse($id);
 
         return $query->getResult();
     }
@@ -42,29 +43,16 @@ class QuestionService  {
     /**
      * Return question
      *
-     * @param integer $questionId Question id
+     * @param integer $id Question id
      *
      * @return Question|null
      *
      * @throws \Exception
      */
-    public function getQuestion($questionId = null) {
-        $query = $this->questionRepository->findOneQuestionQuery($questionId);
+    public function getQuestion($id = null) {
+        $query = $this->questionRepository->findOneQuestionQuery($id);
 
         return $query->getOneOrNullResult();
-    }
-
-    /**
-     * Return questions
-     *
-     * @param integer $id Question id
-     *
-     * @throws \Exception
-     */
-    public function getQuestionChildrens($questionId = null, $id = null) {
-        $query = $this->questionRepository->findAllQuestionInRowQuery($questionId, $id);
-
-        return $query->getResult();
     }
 
 }

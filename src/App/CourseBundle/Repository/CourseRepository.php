@@ -2,6 +2,10 @@
 
 namespace App\CourseBundle\Repository;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\EntityRepository;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+
 /**
  * QuestionRepository
  *
@@ -9,5 +13,4 @@ namespace App\CourseBundle\Repository;
  * repository methods below.
  */
 class CourseRepository extends \Doctrine\ORM\EntityRepository
-{
-}
+{}

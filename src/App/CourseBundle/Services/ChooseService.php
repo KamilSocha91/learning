@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\ChooseRepository;
+use App\CourseBundle\Repository\ChooseRepository;
 use App\CourseBundle\Entity\Choose;
 
 /**

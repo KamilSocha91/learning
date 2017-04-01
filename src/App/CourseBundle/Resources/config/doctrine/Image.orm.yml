@@ -16,5 +16,9 @@ App\CourseBundle\Entity\Image:
       type: integer
       id: true
       generator:
-        strategy: AUTO     
+        strategy: AUTO    
+  fields:
+    base64:
+      type: string
+      length: 255  
   lifecycleCallbacks: {  }

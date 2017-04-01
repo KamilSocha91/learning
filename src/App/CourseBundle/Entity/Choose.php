@@ -18,6 +18,11 @@ class Choose
   private $question;
 
   /**
+   * @var string
+   */
+  private $answer;
+
+  /**
    * Get id
    *
    * @return int
@@ -41,12 +46,36 @@ class Choose
    *
    * @param ArrayCollection $question Question instance
    *
-   * @return Node
+   * @return Choose
    */
   public function setQuestion ($question) {
       $this->question = $question;
 
       return $this;
+  }
+
+  /**
+   * Set answer
+   *
+   * @param string $answer
+   *
+   * @return Choose
+   */
+  public function setAnswer($answer)
+  {
+    $this->answer = $answer;
+
+    return $this;
+  }
+
+  /**
+   * Get answer
+   *
+   * @return string
+   */
+  public function getAnswer()
+  {
+    return $this->answer;
   }
   
 }

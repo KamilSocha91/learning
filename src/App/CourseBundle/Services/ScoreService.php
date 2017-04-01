@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\ScoreRepository;
+use App\CourseBundle\Repository\ScoreRepository;
 use App\CourseBundle\Entity\Score;
 
 /**

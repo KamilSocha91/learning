@@ -7,7 +7,13 @@ define([
     'app',
     'routes',
     'jquery',
-    'talkify'
+    'promise-polyfill',
+/*    'talkify'
+*/    'talkify-player-core',
+    'talkify-player',
+    'talkify-config',
+    'talkify-word-highlighter',
+    'talkify-timer'
 ], function (require, ng) {
     'use strict';
 

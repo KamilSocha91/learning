@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\ImageRepository;
+use App\CourseBundle\Repository\ImageRepository;
 use App\CourseBundle\Entity\Image;
 
 /**

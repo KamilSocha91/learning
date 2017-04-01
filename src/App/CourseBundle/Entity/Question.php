@@ -178,7 +178,7 @@ class Question
    *
    * @param ArrayCollection $course Course instance
    *
-   * @return Node
+   * @return Question
    */
   public function setCourse ($course) {
       $this->course = $course;

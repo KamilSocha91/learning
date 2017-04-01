@@ -37,7 +37,7 @@ class Image
    *
    * @param string $base64
    *
-   * @return Sound
+   * @return Image
    */
   public function setBase64($base64)
   {
@@ -71,7 +71,7 @@ class Image
    *
    * @param ArrayCollection $question Question instance
    *
-   * @return Node
+   * @return Image
    */
   public function setQuestion ($question) {
       $this->question = $question;

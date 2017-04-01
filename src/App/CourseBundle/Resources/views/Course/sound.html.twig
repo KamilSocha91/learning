@@ -1,17 +1,18 @@
 <div ng-controller="questionCtrl">
 
   <header>
-  	<h1>{{title}}</h1>
+    <h1>{{title}}</h1>
   </header>
 
   <form>
-  	<fieldset>
-  		<textarea readonly id="question" class="question">{{question}}</textarea>
-  		<textarea ng-model="data.answer" class="answer"></textarea>
+    <fieldset>
+      <div id="talkify"></div>
+      <textarea readonly id="question" class="question">{{question}}</textarea>
+      <textarea ng-model="data.answer" class="answer"></textarea>
 
       <button class="btn__load" ng-click="new()">{{'btn.skip'|trans}}</button>
       <button class="btn__save" ng-click="save(data)">{{'btn.confirm'|trans}}</button>
-  	</fieldset>
+    </fieldset>
   </form>
 
 </div>

@@ -1,66 +1,62 @@
 parameters:
   #Repositories classes
-  course.repository.class: 'App\courseBundle\Repository\courseRepository'
-  question.repository.class: 'App\questionBundle\Repository\questionRepository'
-  choose.repository.class: 'App\chooseBundle\Repository\chooseRepository'
-  score.repository.class: 'App\scoreBundle\Repository\scoreRepository'
+  course.repository.class: 'App\CourseBundle\Repository\CourseRepository'
+  question.repository.class: 'App\CourseBundle\Repository\QuestionRepository'
+  choose.repository.class: 'App\CourseBundle\Repository\ChooseRepository'
+  score.repository.class: 'App\CourseBundle\Repository\ScoreRepository'
   #Repositories entity
-  course.repository.entity: 'App\courseBundle\Entity\course'
-  question.repository.entity: 'App\questionBundle\Entity\question'
-  choose.repository.entity: 'App\chooseBundle\Entity\choose'
-  score.repository.entity: 'App\scoreBundle\Entity\score'
+  course.repository.entity: 'App\CourseBundle\Entity\Course'
+  question.repository.entity: 'App\CourseBundle\Entity\Question'
+  choose.repository.entity: 'App\CourseBundle\Entity\Choose'
+  score.repository.entity: 'App\CourseBundle\Entity\Score'
   #Services classes
-  course.service.class: 'App\courseBundle\Services\courseService'
-  question.service.class: 'App\questionBundle\Services\questionService'
-  choose.service.class: 'App\chooseBundle\Services\chooseService'
-  score.service.class: 'App\scoreBundle\Services\scoreService'
+  course.service.class: 'App\CourseBundle\Services\CourseService'
+  question.service.class: 'App\CourseBundle\Services\QuestionService'
+  choose.service.class: 'App\CourseBundle\Services\ChooseService'
+  score.service.class: 'App\CourseBundle\Services\ScoreService'
   #Forms classes
-  question.form.class: 'App\questionBundle\Form\Type\questionType'  
+  question.form.class: 'App\CourseBundle\Form\Type\questionType'  
 services:
   #Repositories
   course.repository:
-    class: %course.repository.class%
+    class: '%course.repository.class%'
     public: false
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: [%course.repository.entity%]
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%course.repository.entity%']
   question.repository:
-    class: %question.repository.class%
+    class: '%question.repository.class%'
     public: false
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: [%question.repository.entity%]
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%question.repository.entity%']
   choose.repository:
-    class: %choose.repository.class%
+    class: '%choose.repository.class%'
     public: false
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: [%choose.repository.entity%]
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%choose.repository.entity%']
   score.repository:
-    class: %score.repository.class%
+    class: '%score.repository.class%'
     public: false
-    factory_service: doctrine.orm.entity_manager
-    factory_method: getRepository
-    arguments: [%score.repository.entity%]
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%score.repository.entity%']
   #Services
   course.service:
-    class: %course.service.class%
+    class: '%course.service.class%'
     arguments: ['@course.repository']
     scope: request
   question.service:
-    class: %question.service.class%
+    class: '%question.service.class%'
     arguments: ['@question.repository']
     scope: request
   choose.service:
-    class: %choose.service.class%
+    class: '%choose.service.class%'
     arguments: ['@choose.repository']
     scope: request
   score.service:
-    class: %score.service.class%
+    class: '%score.service.class%'
     arguments: ['@score.repository']
     scope: request
   #Forms
   question.form:
-    class: %question.form.class%
+    class: '%question.form.class%'
     tags:
       - { name: form.type, alias: app_erp_question }

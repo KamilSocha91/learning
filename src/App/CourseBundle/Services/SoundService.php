@@ -1,7 +1,7 @@
 <?php
 namespace App\CourseBundle\Services;
 
-use App\CourseBundle\Entity\SoundRepository;
+use App\CourseBundle\Repository\SoundRepository;
 use App\CourseBundle\Entity\Sound;
 
 /**

@@ -12,7 +12,7 @@ define(['./module'], function (services) {
         dataType: "json"
       });
     };
-
+    
   });
 
 });

@@ -19,4 +19,5 @@ define(['./module'], function (directives) {
 
     };
   });
+  
 });

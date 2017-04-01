@@ -15,10 +15,12 @@
 			</header>
 
 			<ul>
-				<li class="course clear__float" ng-repeat="data in list">
-					<cite ng-bind="data.name"></cite>
-					<button class="btn__load" ng-click="start(data.id)">{{'btn.start'|trans}}</button>
-				</li>
+				{% for data in courses %}
+					<li class="course clear__float">
+						<cite>{{data.name}}</cite>
+						<button class="btn__load" ng-click="start({{data.id}})">{{'btn.start'|trans}}</button>
+					</li>
+				{% endfor %}
 			</ul>
 		</aside>
 

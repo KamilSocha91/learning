@@ -16,5 +16,5 @@ App\CourseBundle\Entity\Sound:
       type: integer
       id: true
       generator:
-        strategy: AUTO   
+        strategy: AUTO  
   lifecycleCallbacks: {  }
