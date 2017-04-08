@@ -3,7 +3,9 @@ define(['./module'], function (services) {
 
   services.service( 'Question', function($http, JS) {
     this.save = function (data) {
-      data.question = JS.getValueByClass('question');
+      if (data == undefined) {
+        data = {};
+      }
 
       return  $http({
         method: 'POST',

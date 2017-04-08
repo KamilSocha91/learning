@@ -30,10 +30,19 @@ App\CourseBundle\Entity\Question:
   fields:
     type:
       type: integer
-    name:
+    sound:
+      type: boolean
+    image:
+      type: boolean
+    choose:
+      type: boolean
+    title:
       type: string
       length: 255
     answer:
+      type: string
+      length: 255
+    question:
       type: string
       length: 255
     difficulty:

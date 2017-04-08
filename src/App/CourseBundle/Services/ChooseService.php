@@ -27,31 +27,12 @@ class ChooseService  {
     }
 
     /**
-     * Save entity
-     *
-     * @param array   $result Request data
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    public function save($result) {
-        try {
-            $nodes = json_decode($result, true);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException("Corrupted json");
-        }
-
-        $this->chooseRepository->save($nodes);
-    }
-
-    /**
      * Return chooses list
      *
      * @return choose|null
      */
-    public function getAllChooses() {
-        $query = $this->chooseRepository->findAllChoosesQuery();
+    public function getByQuestionId($id = null) {
+        $query = $this->chooseRepository->findChooses($id);
 
         return $query->getArrayResult();
     }

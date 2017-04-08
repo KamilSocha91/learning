@@ -17,15 +17,35 @@ class Question
 	 */
 	private $type;
 
+  /**
+   * @var boolean
+   */
+  private $sound;
+
+  /**
+   * @var boolean
+   */
+  private $choose;
+
+  /**
+   * @var boolean
+   */
+  private $image;
+
 	/**
 	 * @var string
 	 */
-	private $name;
+	private $title;
 
 	/**
 	 * @var string
 	 */
 	private $answer;
+
+  /**
+   * @var string
+   */
+  private $question;
 
 	/**
 	 * @var int
@@ -92,28 +112,100 @@ class Question
 		return $this->type;
 	}
 
+  /**
+   * Set sound
+   *
+   * @param integer $sound
+   *
+   * @return Question
+   */
+  public function setSound($sound)
+  {
+    $this->sound = $sound;
+
+    return $this;
+  }
+
+  /**
+   * Get sound
+   *
+   * @return int
+   */
+  public function getSound()
+  {
+    return $this->sound;
+  }
+
+  /**
+   * Set choose
+   *
+   * @param integer $choose
+   *
+   * @return Question
+   */
+  public function setChoose($choose)
+  {
+    $this->choose = $choose;
+
+    return $this;
+  }
+
+  /**
+   * Get choose
+   *
+   * @return int
+   */
+  public function getChoose()
+  {
+    return $this->choose;
+  }
+
+    /**
+   * Set image
+   *
+   * @param integer $image
+   *
+   * @return Question
+   */
+  public function setImage($image)
+  {
+    $this->image = $image;
+
+    return $this;
+  }
+
+  /**
+   * Get image
+   *
+   * @return int
+   */
+  public function getImage()
+  {
+    return $this->image;
+  }
+  
 	/**
-	 * Set name
+	 * Set title
 	 *
-	 * @param string $name
+	 * @param string $title
 	 *
 	 * @return Question
 	 */
-	public function setName($name)
+	public function setTitle($title)
 	{
-		$this->name = $name;
+		$this->title = $title;
 
 		return $this;
 	}
 
 	/**
-	 * Get name
+	 * Get title
 	 *
 	 * @return string
 	 */
-	public function getName()
+	public function getTitle()
 	{
-		return $this->name;
+		return $this->title;
 	}
 
 	/**
@@ -139,6 +231,30 @@ class Question
 	{
 		return $this->answer;
 	}
+
+  /**
+   * Set question
+   *
+   * @param string $question
+   *
+   * @return Question
+   */
+  public function setQuestion($question)
+  {
+    $this->question = $question;
+
+    return $this;
+  }
+
+  /**
+   * Get question
+   *
+   * @return string
+   */
+  public function getQuestion()
+  {
+    return $this->question;
+  }
 
 	/**
 	 * Set difficulty

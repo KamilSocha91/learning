@@ -10,73 +10,112 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
-class CourseController extends Controller
-{
-  public function courseAction()
-  {
+class CourseController extends Controller {
+  
+  public function courseAction() {
     $data = [];
+
     try {
       $data['courses'] = $this->get('course.service')->getAll();
     } catch (\Exception $e) {
       throw new BadRequestHttpException("Unable to load courses list");
     }
-///////////
-    $redis = $this->container->get('snc_redis.course');
-    $key = 'new';
-    $value = [
-        'age' => 44,
-        'country' => 'finland',
-        'occupation' => 'software engineer',
-        'reknown' => 'linux kernel',
-      ];
-    $redis->set($key, json_encode($value));
 
-    dump(json_decode($redis->get($key))); 
-/////////////
     return $this->render('AppCourseBundle:Course:course.html.twig', $data);
 
   }
 
   /*
-  * 
-  *
-  *
+  * $id - course id
   */
-  public function questionAction(Request $request, $id = null)
-  {
-  /*  try {*/
-      $questions = $this->get('question.service')->getQuestions($id);
-      //$tree = $this->loadRootNode($nodes[0]->getId(), $treeId);
-   /* } catch (\Exception $e) {
-      throw new BadRequestHttpException("Unable to load questions");
-    }*/
+  public function questionAction($id = null) {
+    $redis = $this->container->get('snc_redis.course');
+    $user = $this->getUser()->getId();
 
-  	$form_data = [
-      'title'=>'question Controller',
-      'question'=>'Are you sure u r loooking for this?',
-      'test'=>$questions
-    ];
+    $data = [];
+    if ( is_null( $redis->get('user-'.$user.',course-'.$id) ) ) {
+      $data['questionsId'] = $this->get('question.service')->questionsId($id);
+      $data = $this->random($data);
+      $data['question'] = $this->get('question.service')->getById($data['random'])[0];
+      $data['course'] = $id;
 
-    return $this->render('AppCourseBundle:Course:question.html.twig', $form_data);
+      $redis->set('user-'.$user.',course-'.$id, json_encode($data));
+    } else {
+      $data = json_decode($redis->get('user-'.$user.',course-'.$id), true);
+    }
 
-    return $this->render('AppCourseBundle:Course:sound.html.twig', $form_data);
+    $data['question'] = $this->getComponents($data['question']);
 
-    return $this->render('AppCourseBundle:Course:choose.html.twig', $form_data);
+    return new Response(json_encode($data));
 
-    return $this->render('AppCourseBundle:Course:image.html.twig', $form_data);
   }
 
-  public function answerAction() {
-/*  try {
-      $this->get('doctrine');
-      $this->get('tree.service')->save($request->getContent());
-      $list = $this->get('tree.service')->getAllTrees();
-    } catch (\Exception $e) {
-        throw new BadRequestHttpException("Unable to save json");
-    }*/
+  private function random($data) {
+    $key = array_rand($data['questionsId']);
+    $data['random'] = $data['questionsId'][$key];
+    unset($data['questionsId'][$key]);
 
-    $response = array("code" => 200, "success" => true/*, "list" => $list*/);
-    return new Response(json_encode($response));
+    return $data;
+  }
+
+  private function getComponents($data) {
+    if ($data['choose'] && $data['image']) {
+      $data = $this->get('question.service')->getBoth($data['id'])[0];
+    } else if ($data['choose']) {
+      $data = $this->get('question.service')->getChooses($data['id'])[0];
+    } else if ($data['image']) {
+      $data = $this->get('question.service')->getImage($data['id'])[0];
+    }
+
+    return $data;
+  }
+
+  public function answerAction(Request $request) {
+    $redis = $this->container->get('snc_redis.course');
+    $user = $this->getUser()->getId();
+    $course = json_decode($request->getContent(),true);
+    $data = json_decode($redis->get('user-'.$user.',course-'.$course['course']), true);
+    
+    $data['score'] = $this->get('score.service')->getById($user)[0];
+    // if there is no field answer ...
+    //check answer for choose
+    if ($course['answer'] == $data['question']['answer']) {
+      $data = $this->setScore($data);
+    }
+    $data = $this->random($data);
+    $data['question'] = $this->get('question.service')->getById($data['random'])[0];
+    $data['question'] = $this->getComponents($data['question']);
+
+    // valid answer input
+    // get type to check correctly
+    // get random from database, by "type" +
+    // if score != 0 && score not smaller than 3 points from highest "type" score +
+    
+    // if $this->random return null save data to databases
+
+    // umów konsultacje
+    // start with create view
+    
+    $redis->set('user-'.$user.',course-'.$data['course'], json_encode($data));
+
+    return new Response(json_encode($data));
+  }
+
+  private function setScore($redis) {
+    if($redis['question']['choose']) {
+      $redis['score']['choose'] += 1;
+    }
+    if($redis['question']['sound']) {
+      $redis['score']['sound'] += 1;
+    }
+    if($redis['question']['image']) {
+      $redis['score']['image'] += 1;
+    }
+    if($redis['question']['question']) {
+      $redis['score']['write'] += 1;
+    } 
+    
+    return $redis;
   }
 
 }

@@ -11,11 +11,21 @@ fieldset {
 	width: 80%;
 	border: none;
 	margin: 0 auto;
-	textarea {
+	textarea, ul {
 		width: 41%;
-    height: 70px;
-    padding: 2%;
     margin: 0 2%;
+    padding: 1%;
+  }
+  textarea {
+    padding: 2%;
+    height: 70px;
+  }
+  cite {
+    bottom: 4px;
+    position: relative;
+  }
+  .choose, .answer {
+    float: right;
   }
   .btn__load, .btn__save {
     padding: 15px;

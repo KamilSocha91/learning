@@ -4,6 +4,11 @@
 
 {% block body %}
 	<div ng-controller="courseCtrl">
+
+		<div class="spinner__background"	ng-show="loading">
+			<div class="spinner"></div>
+		</div>
+
 		<aside>
 			<header>
 				<h1>{{ 'course.create.title'|trans }}</h1>
@@ -24,8 +29,37 @@
 			</ul>
 		</aside>
 
-	  <section class="course" data-bind-html-unsafe="course">
+	  <section ng-show="course" class="course" ng-controller="questionCtrl">
 	  	{# load content from API #}
+	  	<pre ng-bind="course|json"></pre>
+
+		  <header>
+		  	<h1 ng-bind="course.question.title"></h1>
+		  </header>
+
+		  <form>
+		  	<fieldset>
+		      <div id="talkify"></div>
+		  		<textarea ng-show="course.question.question&&!course.question.image" readonly ng-model="course.question.question"></textarea>
+		  		<img ng-repeat="data in course.question.images" ng-show="course.question.image" ng-src="data.base64">
+		  		<textarea ng-hide="course.question.choose" ng-model="course.answer" class="answer"></textarea>
+
+		  		<ul class="choose" ng-show="course.question.choose">
+		  			<li ng-repeat="data in course.question.chooses">
+		  				<label>
+		  					<input class="checkbox" ng-model="data.status" type="checkbox">
+		  					<cite ng-bind="data.answer"></cite>
+		  				</label>
+		  			</li>
+		  		</ul>
+
+		  		<div class="clear"></div>
+		      <button class="btn__load" ng-click="skip()">{{'btn.skip'|trans}}</button>
+		      <button class="btn__save" ng-click="save(course)">{{'btn.confirm'|trans}}</button>
+		  	</fieldset>
+		  </form>
+
 	  </section>
+
 	</div>
 {% endblock %}

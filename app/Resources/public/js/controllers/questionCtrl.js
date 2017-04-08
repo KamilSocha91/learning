@@ -3,17 +3,14 @@ define(['./module'], function (controllers) {
 
   controllers.controller('questionCtrl', function ($scope, Question, JS) {
     $scope.save = function(data) {
+      $scope.loading = true;
       Question.save(data).then(function(response) {
-        $scope.list = response;
-      }).catch(console.log.bind(console));
+        $scope.course = response.data;
+      }).catch(console.log.bind(console)).finally(function () {
+        $scope.loading = false;
+      });
     };
-
-    angular.element(document).ready(function () {
-      var player = new TtsPlayer();
-
-      player.playText(JS.getValueByClass('question')); 
-    });
-
+    
   });
 
 });

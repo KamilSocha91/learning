@@ -11,49 +11,34 @@ use App\CourseBundle\Entity\Score;
  */
 class ScoreService  {
 
-    /**
-     * @var scoreRepository
-     */
-    private $scoreRepository;
+  /**
+   * @var scoreRepository
+   */
+  private $scoreRepository;
 
-    /**
-     * ScoreService constructor.
-     *
-     * @param scoreRepository $scoreRepository Score repository instance
-     *
-     */
-    public function __construct (scoreRepository $scoreRepository) {
-        $this->scoreRepository = $scoreRepository;
-    }
+  /**
+   * ScoreService constructor.
+   *
+   * @param scoreRepository $scoreRepository Score repository instance
+   *
+   */
+  public function __construct (scoreRepository $scoreRepository) {
+      $this->scoreRepository = $scoreRepository;
+  }
 
-    /**
-     * Save entity
-     *
-     * @param array   $result Request data
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    public function save($result) {
-        try {
-            $nodes = json_decode($result, true);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException("Corrupted json");
-        }
+  /**
+   * Return score
+   *
+   * @param integer $id Score id
+   *
+   * @return Score|null
+   *
+   * @throws \Exception
+   */
+  public function getById($id = null) {
+    $query = $this->scoreRepository->findById($id);
 
-        $this->scoreRepository->save($nodes);
-    }
-
-    /**
-     * Return scores list
-     *
-     * @return score|null
-     */
-    public function getAllScores() {
-        $query = $this->scoreRepository->findAllScoresQuery();
-
-        return $query->getArrayResult();
-    }
+    return $query->getArrayResult();
+  }
 
 }

@@ -21,4 +21,6 @@ App\CourseBundle\Entity\Choose:
     answer:
       type: string
       length: 255
+    status:
+      type: boolean
   lifecycleCallbacks: {  }

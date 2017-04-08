@@ -10,4 +10,41 @@ namespace App\CourseBundle\Repository;
  */
 class ScoreRepository extends \Doctrine\ORM\EntityRepository
 {
+
+  /**
+  * @return \Doctrine\ORM\Query
+  */
+  public function findById($id = null) {
+    $query = $this->findByIdQb($id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * Return QueryBuilder for question by id
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findByIdQb($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+
+    $query = $this->findSimpleScore('s')
+      ->andWhere('s.user = :user')
+      ->setParameter(':user', $id);
+
+    return $query;
+  }
+
+  /**
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  private function findSimpleScore($fields = null) {
+    $query = $this->createQueryBuilder('s')
+      ->select($fields);
+
+    return $query;
+  }
+
 }

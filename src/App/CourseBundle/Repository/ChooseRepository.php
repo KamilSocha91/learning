@@ -10,4 +10,43 @@ namespace App\CourseBundle\Repository;
  */
 class ChooseRepository extends \Doctrine\ORM\EntityRepository
 {
+
+  /**
+  * @return \Doctrine\ORM\Query
+  */
+  public function findChooses($id = null) {
+    $query = $this->findByIdQb($id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * Return QueryBuilder for choose by question id
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findByIdQb($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+
+    $query = $this->findSimpleQuestion()
+      ->leftJoin('choose.question', 'question')
+      ->addSelect('question')
+      ->andWhere('choose.question = :id')
+      ->setParameter(':id', $id);
+
+    return $query;
+  }
+
+  /**
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  private function findSimpleQuestion() {
+    $query = $this->createQueryBuilder('choose')
+      ->select('choose');
+
+    return $query;
+  }
+
 }

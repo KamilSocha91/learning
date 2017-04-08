@@ -23,6 +23,12 @@ class Choose
   private $answer;
 
   /**
+   * @var boolean
+   */
+  private $status;
+
+
+  /**
    * Get id
    *
    * @return int
@@ -77,5 +83,30 @@ class Choose
   {
     return $this->answer;
   }
+
+  /**
+   * Set status
+   *
+   * @param integer $status
+   *
+   * @return Question
+   */
+  public function setSound($status)
+  {
+    $this->status = $status;
+
+    return $this;
+  }
+
+  /**
+   * Get status
+   *
+   * @return int
+   */
+  public function getSound()
+  {
+    return $this->status;
+  }
+
   
 }

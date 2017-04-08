@@ -1,3 +1,3 @@
 define([
-    './bindHtmlUnsafe'
+  './bindHtmlUnsafe'
 ], function () {});
