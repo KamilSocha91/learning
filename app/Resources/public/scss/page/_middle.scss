@@ -7,7 +7,7 @@ header {
   background: $shadow;
   color: #fff;
 }
-fieldset {
+/* fieldset {
 	width: 80%;
 	border: none;
 	margin: 0 auto;
@@ -42,20 +42,7 @@ fieldset {
     width: 45%;
     padding: 2%;
   }
-}
-aside {
-	width: 20%;
-	float: left;
-}
-section.course {
-	width: 67%;
-	float: left;
-}
-aside, section.course {
-	border: 2px solid $line;
-	padding: 2%;
-	margin: 1%;
-}
+} */
 li.course {
 	margin:10px 0;
 	button {

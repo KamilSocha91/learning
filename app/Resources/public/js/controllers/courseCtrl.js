@@ -4,6 +4,7 @@ define(['./module'], function (controllers) {
   controllers.controller('courseCtrl', function ($scope, Course, JS) {
     $scope.start = function(data) { 
       $scope.loading = true;
+      delete $scope.create;
       Course.start(data).then(function(response) {
         $scope.course = response.data;
 
@@ -49,6 +50,20 @@ var file = new File([blob], 'imageFileName.png');
         player.playText(data); 
       }
     };
+
+    $scope.new = function() { 
+      delete $scope.course;
+      $scope.create = Course.create();
+    };
+
+    $scope.addQuestion = function() {
+      console.log($scope.create.questions);
+      $scope.create.questions.push( Course.add() );
+    }
+
+    $scope.removeQuestion = function(index) {
+      $scope.create.questions.splice(index, 1);
+    }
     
   });
 

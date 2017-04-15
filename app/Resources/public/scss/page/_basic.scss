@@ -22,23 +22,11 @@ ul {
     display: block;
     clear: both;
 }
-.btn__confirm {
-  @include button($b-border, $b-blue, #fff, 4px);
+button, fieldset textarea, cite {
+  margin: 10px 0;
 }
-.btn__delete {
-  @include button($b-border, $b-red, #fff, 4px);
-}
-.btn__load {
-  @include button($b-border, $b-yellow, #333, 4px);
-}
-.btn__save {
-  @include button($b-border, $b-green, #fff, 4px);
-}
-button:hover {
-  border: 2px solid $hover;
-}
-button:active {
-  padding: 4px 8px;
+.cursor__pointer {
+  cursor: pointer;
 }
 label {
   input[type="checkbox"]:before {

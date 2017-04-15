@@ -50,48 +50,38 @@ class CourseController extends Controller {
 
   }
 
-  private function random($data) {
-    $key = array_rand($data['questionsId']);
-    $data['random'] = $data['questionsId'][$key];
-    unset($data['questionsId'][$key]);
-
-    return $data;
-  }
-
-  private function getComponents($data) {
-    if ($data['choose'] && $data['image']) {
-      $data = $this->get('question.service')->getBoth($data['id'])[0];
-    } else if ($data['choose']) {
-      $data = $this->get('question.service')->getChooses($data['id'])[0];
-    } else if ($data['image']) {
-      $data = $this->get('question.service')->getImage($data['id'])[0];
-    }
-
-    return $data;
-  }
-
   public function answerAction(Request $request) {
     $redis = $this->container->get('snc_redis.course');
     $user = $this->getUser()->getId();
     $course = json_decode($request->getContent(),true);
     $data = json_decode($redis->get('user-'.$user.',course-'.$course['course']), true);
-    
     $data['score'] = $this->get('score.service')->getById($user)[0];
-    // if there is no field answer ...
-    //check answer for choose
-    if ($course['answer'] == $data['question']['answer']) {
-      $data = $this->setScore($data);
-    }
-    $data = $this->random($data);
-    $data['question'] = $this->get('question.service')->getById($data['random'])[0];
-    $data['question'] = $this->getComponents($data['question']);
 
-    // valid answer input
+    // add multiple answer patterns
+    if ( $this->checkAnswer($course, $data['question']) === false ) {
+      $data['question']['error'] = true;
+      return new Response(json_encode($data));
+    }
+
+    $data = $this->setScore($data);
+    $data = $this->random($data);
+
+    if ( is_null($data['random']) ) {
+      // if $this->random return null save data to databases
+      $data['end'] = true;
+      return new Response(json_encode($data));
+    }
+      $data['question'] = $this->get('question.service')->getById($data['random'])[0];
+      $data['question'] = $this->getComponents($data['question']);
+
+    
+
+
     // get type to check correctly
     // get random from database, by "type" +
     // if score != 0 && score not smaller than 3 points from highest "type" score +
     
-    // if $this->random return null save data to databases
+    
 
     // umów konsultacje
     // start with create view
@@ -99,6 +89,23 @@ class CourseController extends Controller {
     $redis->set('user-'.$user.',course-'.$data['course'], json_encode($data));
 
     return new Response(json_encode($data));
+  }
+
+  private function checkAnswer($course, $data) {
+    $answer = false;
+    if (isset($course['answer']) && $course['answer'] === $data['answer']) {
+      $answer = true;
+    }
+
+    if (isset($course['chooses'])) {
+      foreach ($course['chooses'] as $key => $value) {
+        if ($value === true && $key === $data['answer']) {
+          $answer = true; 
+        }
+      }
+    }
+
+    return $answer;
   }
 
   private function setScore($redis) {
@@ -117,5 +124,30 @@ class CourseController extends Controller {
     
     return $redis;
   }
+
+  private function random($data) {
+    $key = array_rand($data['questionsId']);
+    if (is_null($key)) {
+      $data['random'] = null;
+      return $data;
+    }
+    $data['random'] = $data['questionsId'][$key];
+    unset($data['questionsId'][$key]);
+
+    return $data;
+  }
+
+  private function getComponents($data) {
+    if ($data['choose'] && $data['image']) {
+      $data = $this->get('question.service')->getBoth($data['id'])[0];
+    } else if ($data['choose']) {
+      $data = $this->get('question.service')->getChooses($data['id'])[0];
+    } else if ($data['image']) {
+      $data = $this->get('question.service')->getImage($data['id'])[0];
+    }
+
+    return $data;
+  }
+
 
 }
