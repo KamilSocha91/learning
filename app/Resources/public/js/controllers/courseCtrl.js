@@ -1,7 +1,7 @@
 define(['./module'], function (controllers) {
   'use strict';
 
-  controllers.controller('courseCtrl', function ($scope, Course, JS) {
+  controllers.controller('courseCtrl', function ($scope, Course, JS, Question) {
     $scope.start = function(data) { 
       $scope.loading = true;
       delete $scope.create;
@@ -14,29 +14,25 @@ define(['./module'], function (controllers) {
           JS.removeChildrensById("talkify");
         }
 
-        if (response.data.question.choose) {
-        }
+      }).catch(console.log.bind(console)).finally(function () {
+        $scope.loading = false;
+      });
+    };
 
-        if (response.data.question.image) {
-          //convert base64 to image
-          response.data.question.images.forEach(function(val) {
-            var image = new Image();
-            image.src = val;
+    $scope.saveQuestion = function(data) {
+      $scope.loading = true;
+      Question.save(data).then(function(response) {
+        $scope.course = response.data;
+      }).catch(console.log.bind(console)).finally(function () {
+        $scope.loading = false;
+      });
+    };
 
-            console.log(val);
-            var blob = new Blob([val], {type: 'image/png'});
-            console.log(blob);
-            var file = new File([blob], 'imageFileName.png');
-            console.log(file);
-          });
-        }
-/*
-        var imageBase64 = "image base64 data";
-var blob = new Blob([imageBase64], {type: 'image/png'});
-From this blob, you can generate file object.
-
-var file = new File([blob], 'imageFileName.png');
-*/
+    $scope.skip = function(data) {
+      $scope.loading = true;
+      data['skip'] = true;
+      Question.save(data).then(function(response) {
+        $scope.course = response.data;
       }).catch(console.log.bind(console)).finally(function () {
         $scope.loading = false;
       });
@@ -56,15 +52,80 @@ var file = new File([blob], 'imageFileName.png');
       $scope.create = Course.create();
     };
 
-    $scope.addQuestion = function() {
-      console.log($scope.create.questions);
-      $scope.create.questions.push( Course.add() );
-    }
+    $scope.add = function(type, key) {
+      switch(type) {
+        case 'questions':
+          $scope.create.questions.push( Course.add() );
+          break;
+        case 'patterns':
+          $scope.create.questions[key].patterns.push( Course.pattern() );
+          break;
+        case 'chooses':
+          $scope.create.questions[key].chooses.push( Course.choose() );
+          break;
+      }
+    };
 
-    $scope.removeQuestion = function(index) {
-      $scope.create.questions.splice(index, 1);
-    }
+    $scope.remove = function(index, type, key) {
+      switch(type) {
+        case 'questions':
+          $scope.create.questions.splice(index, 1);
+          break;
+        case 'patterns':
+          $scope.create.questions[key].patterns.splice(index, 1);
+          break;
+        case 'chooses':
+          $scope.create.questions[key].chooses.splice(index, 1);
+          break;
+        case 'images':
+          $scope.create.questions[key].images.splice(index, 1);
+          break;
+      }
+    };
     
+    $scope.processFiles = function(files, key) {
+      angular.forEach(files, function(flowFile, i) {
+          var fileReader = new FileReader();
+
+          fileReader.onload = function (event) {
+            var uri = {'base64':event.target.result};   
+            $scope.create.questions[key].images.push(uri);  
+          };
+          fileReader.readAsDataURL(flowFile.file);
+      });
+    };
+
+    $scope.save = function() {
+      $scope.loading = true;
+      console.log($scope.create);
+      Course.save($scope.create).then(function(response) {
+        $scope.create = response.data;
+
+      }).catch(console.log.bind(console)).finally(function () {
+        $scope.loading = false;
+      });
+    };
+
+    $scope.change = function(type, key) {
+      if (type==0||type==1||type==4||type==5||type==8||type==9) {
+        $scope.create.questions[key].sound = true;
+      } else {
+        $scope.create.questions[key].sound = false;
+      }
+
+      if (type==0||type==2||type==4||type==6||type==8) {
+        $scope.create.questions[key].image = true;
+      } else {
+        $scope.create.questions[key].image = false;
+      }
+
+      if (type==1||type==3||type==5||type==7||type==9) {
+        $scope.create.questions[key].choose = true;
+      } else {
+        $scope.create.questions[key].choose = false;
+      }
+    };
+
   });
 
 });

@@ -2,6 +2,9 @@
 
 namespace App\CourseBundle\Repository;
 
+use App\CourseBundle\Entity\Image;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * ImageRepository
  *
@@ -10,4 +13,46 @@ namespace App\CourseBundle\Repository;
  */
 class ImageRepository extends \Doctrine\ORM\EntityRepository
 {
+
+    /**
+   * @param array   $nodes Request data
+   */
+  public function save($data, $question) {
+      $query = new Image();
+      $query->setQuestion($question);
+      $query->setBase64($data["base64"]);
+
+      $this->_em->persist($query);
+      $this->_em->flush();
+
+      return $query->getId();
+  }
+
+    /**
+  * Return QueryBuilder
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findImageById($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+    
+    $query = $this->findSimple('i')
+      ->andWhere('i.question = :question')
+      ->setParameter(':question', $id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  private function findSimple($fields = null) {
+    $query = $this->createQueryBuilder('i')
+      ->select($fields);
+
+    return $query;
+  }
+
 }

@@ -1,6 +1,13 @@
 body {
   position: relative;
 }
+.btn {
+  width: 100%;
+}
+textarea[readonly] {
+  background-color:$gray;
+  color: #fff;
+}
 img {
   max-width:100%;
   height:auto;
@@ -28,27 +35,6 @@ button, fieldset textarea, cite {
 .cursor__pointer {
   cursor: pointer;
 }
-label {
-  input[type="checkbox"]:before {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    content:"\f096";
-    opacity:1 !important;
-    margin-top:-25px;
-    appearance:none;
-    background:#fff; 
-  }
-  input[type="checkbox"]:checked:before {
-    content:"\f046";
-  }
-  input[type="checkbox"] {
-    cursor: pointer;
-    font-size:22px;appearance:none; -webkit-appearance:none; -moz-appearance:none;
-  }
-} 
 .spinner__background {
   position: absolute;
   top: 0;

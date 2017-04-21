@@ -2,6 +2,9 @@
 
 namespace App\CourseBundle\Repository;
 
+use App\CourseBundle\Entity\Score;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * ScoreRepository
  *
@@ -10,6 +13,40 @@ namespace App\CourseBundle\Repository;
  */
 class ScoreRepository extends \Doctrine\ORM\EntityRepository
 {
+  /**
+   * @param array   $nodes Request data
+   */
+  public function save($user) {
+    $query = new Score();
+    $query->setUser($user);
+
+    $this->_em->persist($query);
+    $this->_em->flush();
+  }
+
+    /**
+   * @param array   $nodes Request data
+   */
+  public function update($score,Score $query) {
+    $query->setText($score['text']);
+    $query->setSound($score['sound']);
+    $query->setChoose($score['choose']);
+    $query->setImage($score['image']);
+    $query->setSTT($score['stt']);
+    $query->setSTC($score['stc']);
+    $query->setTT($score['tt']);
+    $query->setTC($score['tc']);
+    $query->setST($score['st']);
+    $query->setSC($score['sc']);
+    $query->setIT($score['it']);
+    $query->setIC($score['ic']);
+    $query->setIST($score['ist']);
+    $query->setISC($score['isc']);
+    $query->setTotal($score['total']);
+
+    $this->_em->persist($query);
+    $this->_em->flush();
+  }
 
   /**
   * @return \Doctrine\ORM\Query
@@ -26,6 +63,32 @@ class ScoreRepository extends \Doctrine\ORM\EntityRepository
   * @return \Doctrine\ORM\QueryBuilder
   */
   public function findByIdQb($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+
+    $query = $this->findSimpleScore('s')
+      ->andWhere('s.id = :id')
+      ->setParameter(':id', $id);
+
+    return $query;
+  }
+
+  /**
+  * @return \Doctrine\ORM\Query
+  */
+  public function findUserById($id = null) {
+    $query = $this->findUserByIdQb($id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * Return QueryBuilder for question by id
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findUserByIdQb($id = null) {
     if ($id == null) {
       throw new BadRequestHttpException("No id provided");
     }

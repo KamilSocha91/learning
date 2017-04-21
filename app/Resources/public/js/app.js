@@ -1,5 +1,6 @@
 define([
   'angular',
+  'flow',
   './controllers/index',
   './services/index',
   './directives/index'/*,

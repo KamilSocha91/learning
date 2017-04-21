@@ -7,13 +7,9 @@ App\CourseBundle\Entity\Course:
     questions:
       targetEntity: App\CourseBundle\Entity\Question
       mappedBy: course
-  manyToOne:
-    score:
-      targetEntity: App\CourseBundle\Entity\Score
-      inversedBy: courses
-      joinColumn:
-        name: score_id
-        referencedColumnName: id
+    usercourses:
+      targetEntity: App\CourseBundle\Entity\UserCourse
+      mappedBy: course
 
   id:
     id:

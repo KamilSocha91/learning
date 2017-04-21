@@ -3,10 +3,6 @@ App\CourseBundle\Entity\Score:
   table: score
   repositoryClass: App\CourseBundle\Repository\ScoreRepository
 
-  oneToMany:
-    courses:
-      targetEntity: App\CourseBundle\Entity\Course
-      mappedBy: score
   manyToOne:
     user:
       targetEntity: App\UsersBundle\Entity\User
@@ -22,12 +18,34 @@ App\CourseBundle\Entity\Score:
       generator:
         strategy: AUTO
   fields:
-    write:
-      write: integer
+    text:
+      text: integer
     sound:
       sound: integer
     choose:
       choose: integer
     image:
       image: integer
+    stt:
+      stt: integer
+    stc:
+      stc: integer
+    tt:
+      tt: integer
+    tc:
+      tc: integer
+    st:
+      st: integer
+    sc:
+      sc: integer
+    it:
+      it: integer
+    ic:
+      ic: integer
+    ist:
+      ist: integer
+    isc:
+      isc: integer
+    total:
+      total: integer
   lifecycleCallbacks: {  }

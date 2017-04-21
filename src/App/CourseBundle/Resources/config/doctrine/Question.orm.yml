@@ -20,6 +20,9 @@ App\CourseBundle\Entity\Question:
     images:
       targetEntity: App\CourseBundle\Entity\Image
       mappedBy: question
+    patterns:
+      targetEntity: App\CourseBundle\Entity\Pattern
+      mappedBy: question
 
   id:
     id:

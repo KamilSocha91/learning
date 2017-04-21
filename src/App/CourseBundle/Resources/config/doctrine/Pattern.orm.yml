@@ -1,0 +1,24 @@
+App\CourseBundle\Entity\Pattern:
+  type: entity
+  table: pattern
+  repositoryClass: App\CourseBundle\Repository\PatternRepository
+
+  manyToOne:
+    question:
+      targetEntity: App\CourseBundle\Entity\Question
+      inversedBy: patterns
+      joinColumn:
+        name: question_id
+        referencedColumnName: id
+
+  id:
+      id:
+          type: integer
+          id: true
+          generator:
+              strategy: AUTO
+  fields:
+      answer:
+          type: string
+          length: 255
+  lifecycleCallbacks: {  }

@@ -2,6 +2,8 @@
 
 namespace App\CourseBundle\Repository;
 
+use App\CourseBundle\Entity\Course;
+
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -13,4 +15,79 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * repository methods below.
  */
 class CourseRepository extends \Doctrine\ORM\EntityRepository
-{}
+{
+  /**
+   */
+  public function save($name) {
+    $course = new Course();
+    $course->setName($name);
+
+    $this->_em->persist($course);
+    $this->_em->flush();
+
+    return $course;
+  }
+
+  /**
+  * @return \Doctrine\ORM\Query
+  */
+  public function findById($id = null) {
+    $query = $this->findByIdQb($id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * Return QueryBuilder for question by id
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findByIdQb($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+
+    $query = $this->findSimpleQuestion('c')
+      ->andWhere('c.id = :id')
+      ->setParameter(':id', $id);
+
+    return $query;
+  }
+
+  /**
+  * @return \Doctrine\ORM\Query
+  */
+  public function findByUser($id = null) {
+    $query = $this->findByUserQb($id);
+
+    return $query->getQuery();
+  }
+
+  /**
+  * Return QueryBuilder for question by id
+  *
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  public function findByUserQb($id = null) {
+    if ($id == null) {
+      throw new BadRequestHttpException("No id provided");
+    }
+
+    $query = $this->findSimpleQuestion('c')
+      ->andWhere('c.id = :id')
+      ->setParameter(':id', $id);
+
+    return $query;
+  }
+  
+  /**
+  * @return \Doctrine\ORM\QueryBuilder
+  */
+  private function findSimpleQuestion($fields = null) {
+    $query = $this->createQueryBuilder('c')
+      ->select($fields);
+
+    return $query;
+  }
+
+}

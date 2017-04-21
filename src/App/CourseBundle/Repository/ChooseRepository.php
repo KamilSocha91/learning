@@ -2,6 +2,9 @@
 
 namespace App\CourseBundle\Repository;
 
+use App\CourseBundle\Entity\Choose;
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * ChooseRepository
  *
@@ -10,6 +13,20 @@ namespace App\CourseBundle\Repository;
  */
 class ChooseRepository extends \Doctrine\ORM\EntityRepository
 {
+
+  /**
+   * @param array   $nodes Request data
+   */
+  public function save($data, $question) {
+      $query = new Choose();
+      $query->setQuestion($question);
+      $query->setStatus($data["answer"]);
+      $query->setAnswer($data["answer"]);
+
+      $this->_em->persist($query);
+      $this->_em->flush();
+  }
+
 
   /**
   * @return \Doctrine\ORM\Query

@@ -35,14 +35,10 @@ class CourseService  {
      *
      * @throws \Exception
      */
-    public function save($result) {
-        try {
-            $nodes = json_decode($result, true);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException("Corrupted json");
-        }
+    public function save($name) {
+        $course = $this->courseRepository->save($name);
 
-        $this->courseRepository->save($nodes);
+        return $course;
     }
 
     /**
@@ -55,5 +51,32 @@ class CourseService  {
 
         return $query;
     }
+
+
+    /**
+     * Return Courses list
+     *
+     * @return Course|null
+     */
+    public function getByUser() {
+        $query = $this->courseRepository->findByUser();
+
+        return $query;
+    }
+    
+    /**
+   * Return course
+   *
+   * @param integer $id Course id
+   *
+   * @return Course|null
+   *
+   * @throws \Exception
+   */
+  public function getById($id = null) {
+    $query = $this->courseRepository->findById($id);
+
+    return $query->getResult();
+  }
 
 }

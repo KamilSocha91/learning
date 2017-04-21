@@ -11,3 +11,9 @@ answer:
     defaults: { _controller: AppCourseBundle:Course:answer }
     options:
         expose: true
+create:
+    path:     /create
+    defaults: { _controller: AppCourseBundle:Course:create }
+    options:
+        expose: true
+

@@ -26,34 +26,29 @@ class ImageService  {
         $this->imageRepository = $imageRepository;
     }
 
-    /**
-     * Save entity
-     *
-     * @param array   $result Request data
-     *
-     * @return void
-     *
-     * @throws \Exception
-     */
-    public function save($result) {
-        try {
-            $nodes = json_decode($result, true);
-        } catch (\Exception $e) {
-            throw new BadRequestHttpException("Corrupted json");
-        }
+  /**
+   * Return image
+   *
+   * @return image|null
+   */
+  public function getImage($id = null) {
+    $query = $this->imageRepository->findImageById($id);
+    return  $query->getResult();
+  }
 
-        $this->imageRepository->save($nodes);
-    }
+  /**
+   * Save entity
+   *
+   * @param array   $result Request data
+   *
+   * @return void
+   *
+   * @throws \Exception
+   */
+  public function save($data, $quesiton) {
+    $id = $this->imageRepository->save($data, $quesiton);
 
-    /**
-     * Return Images list
-     *
-     * @return Image|null
-     */
-    public function getAllImages() {
-        $query = $this->imageRepository->findAllImagesQuery();
-
-        return $query->getArrayResult();
-    }
+    return $id;
+  }
 
 }

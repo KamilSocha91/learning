@@ -1,14 +1,95 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppDashboardBundle:Dashboard:index{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
-<h1>Welcome to the Dashboard:index page</h1>
+
+{% if security == false %}
+  <h3 class="red-text">Please login in <a href="{{ path('fos_user_security_login') }}">Login</a></h3>
+{% else %}
+  {% if admin != false %}
+    <h2>Admin Dashboard</h2>
+    <h5>Modify: <a href="{{ path('course') }}">Courses</a></h5> 
+    <h5>Users list</h5>
+    <table class="bordered">
+      <thead>
+        <th>User</th>
+        <th>Course</th>
+        <th>Score(sound)</th>
+        <th>Score(text)</th>
+        <th>Score(image)</th>
+        <th>Score(total)</th>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{user.user.username}}</td>
+            <td>{{user.course.name}}</td>
+            <td>{{user.user.score.values[0].sound}}</td>
+            <td>{{user.user.score.values[0].text}}</td>
+            <td>{{user.user.score.values[0].image}}</td>
+            <td>{{user.user.score.values[0].total}}</td>
+
+          </tr>
+        {% endfor %}      
+      </tbody>
+    </table>
+
+    <h5>Courses list</h5>
+    <table class="bordered">
+      <thead>
+        <th>Course</th>
+        <th>Questions</th>
+        <th>Type</th>
+        <th>Question</th>
+        <th>Answer</th>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr>
+            <td>{{course.name}}</td>
+            {% for question in course.questions.values %}
+              <tr>
+                <td></td>
+                <td>{{question.title}}</td>
+                <td>{{question.type}}</td>
+                <td>{{question.question}}</td>
+                <td>{{question.answer}}</td>
+              </tr>          
+            {% endfor %}
+          </tr>
+        {% endfor %}      
+      </tbody>
+    </table>
+  {% else %}
+    <h2>User Dashboard</h2>
+    <h5>Start: <a href="{{ path('course') }}">Course</a></h5> 
+    <h5>Your Courses</h5>
+    <table class="bordered">
+      <thead>
+        <th>User</th>
+        <th>Course</th>
+        <th>Score(sound)</th>
+        <th>Score(text)</th>
+        <th>Score(image)</th>
+        <th>Score(total)</th>
+      </thead>
+      <tbody>
+        {% for user in users %}
+          <tr>
+            <td>{{user.user.username}}</td>
+            <td>{{user.course.name}}</td>
+            <td>{{user.user.score.values[0].sound}}</td>
+            <td>{{user.user.score.values[0].text}}</td>
+            <td>{{user.user.score.values[0].image}}</td>
+            <td>{{user.user.score.values[0].total}}</td>
+
+          </tr>
+        {% endfor %}      
+      </tbody>
+    </table>
+  {% endif %}
+{% endif %}
+
 {% endblock %}
 
-    {% block javascripts %}
-    	<script src="{{ asset('vendor/angular/angular.min.js') }}"></script>
-        <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-        <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
-        <script type="text/javascript" data-main="{{ asset('js/dashboard')}}" src="/vendor/requirejs/require.js"></script>
-    {% endblock %}

@@ -37,4 +37,17 @@ class ChooseService  {
         return $query->getArrayResult();
     }
 
+   /**
+   * Save entity
+   *
+   * @param array   $result Request data
+   *
+   * @return void
+   *
+   * @throws \Exception
+   */
+  public function save($data, $quesiton) {
+    $this->chooseRepository->save($data, $quesiton);
+  }
+
 }

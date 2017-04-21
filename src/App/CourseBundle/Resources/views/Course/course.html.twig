@@ -9,12 +9,14 @@
 			<div class="spinner"></div>
 		</div>
 
+
 		<aside class="col s4">
 			<header>
-				<h2>{{ 'course.create.title'|trans }}</h2>
-				<p>{{'course.create.description'|trans}}:</p>
-				<button class="waves-effect waves-light btn" ng-click="new()">{{'btn.create'|trans}}</button>
-
+				{% if admin != false %}
+					<h2>{{ 'course.create.title'|trans }}</h2>
+					<p>{{'course.create.description'|trans}}:</p>
+					<button class="waves-effect waves-light btn" ng-click="new()">{{'btn.create'|trans}}</button>
+				{% endif %}
 				<h3>{{ 'course.title'|trans }}</h3>
 				<p>{{'course.description'|trans}}:</p>
 			</header>
@@ -23,44 +25,73 @@
 				{% for data in courses %}
 					<li>
 						<cite class="col m4">{{data.name}}</cite>
-						<button class="col m4 waves-effect waves-light btn orange" ng-click="edit({{data.id}})">Edit</button>
-						<button class="col m4 waves-effect waves-light btn" ng-click="start({{data.id}})">{{'btn.start'|trans}}</button>
+							{% if admin != false %}
+								<button class="col m4 waves-effect waves-light btn orange" ng-click="edit({{data.id}})">Edit</button>
+								<button class="col m4 waves-effect waves-light btn" ng-click="start({{data.id}})">{{'btn.start'|trans}}</button>
+							{% else %}
+								<button class="col m8 waves-effect waves-light btn" ng-click="start({{data.id}})">{{'btn.start'|trans}}</button>
+							{% endif %}
 					</li>
 				{% endfor %}
 			</ul>
 		</aside>
 
-	  <section class="col s8 course" ng-show="course" ng-controller="questionCtrl">
+	  <section class="col s8 course" ng-show="course">
 	  	{# load content from API #}
-	  	<pre ng-bind="course|json"></pre>
+	  	
+	  	<div ng-show="course.end">
+	  		<h3 class="red-text">{[{course.message}]}</h3>
+	  		<h4>Score: {[{course.score.total}]}</h4>
+	  	</div>
 
-	  	<h2 ng-bind="course.question.title"></h2>
-
-		  <form>
+		  <form ng-hide="course.end">
+		  	<h2 ng-bind="course.question.title"></h2>
 		  	<fieldset>
 		      <div id="talkify"></div>
-		  		<textarea ng-show="course.question.question&&!course.question.image" readonly ng-model="course.question.question"></textarea>
-		  		<img ng-repeat="data in course.question.images" ng-show="course.question.image" ng-src="data.base64">
-		  		<textarea ng-hide="course.question.choose" ng-model="course.answer" class="answer"></textarea>
 
-		  		<ul class="choose" ng-show="course.question.choose">
-		  			<li ng-repeat="data in course.question.chooses">
-		  				<label>
-		  					<input class="checkbox" ng-model="data.status" type="checkbox">
-		  					<cite ng-bind="data.answer"></cite>
-		  				</label>
-		  			</li>
-		  		</ul>
+		      <div ng-show="course.question.type==0||course.question.type==1||course.question.type==2||course.question.type==3||course.question.type==4" 
+		      class="col s12 m6">
+		  			<textarea readonly ng-model="course.question.question"></textarea>
+		  		</div>
 
-		  		<div class="clear"></div>
-		      <button class="waves-effect waves-light btn" ng-click="skip()">{{'btn.skip'|trans}}</button>
-		      <button class="waves-effect waves-light btn green" ng-click="save(course)">{{'btn.confirm'|trans}}</button>
+	  			<div ng-show="course.question.type==6||course.question.type==7||course.question.type==8||course.question.type==9"
+	  			class="col s12 m6">
+	  				<img ng-repeat="image in course.question.images" class="responsive-img" ng-src="{[{image.base64}]}"/>
+	  			</div>
+
+	  			<div ng-show="course.question.type==0||course.question.type==2||course.question.type==4||course.question.type==6||course.question.type==8"
+	  			class="col s12 m6">
+	  				<textarea ng-model="course.answer"></textarea>
+	  			</div>
+
+	  			<div ng-show="course.question.type==1||course.question.type==3||course.question.type==5||course.question.type==7||course.question.type==9" 
+	  			class="col s12 m6">
+	  				<ul>
+			  			<li ng-repeat="(key, data) in course.question.chooses">
+		  					<input id="check-{[{key}]}" ng-model="data.status" type="checkbox">
+		  					<label for="check-{[{key}]}" ng-bind="data.answer"></label>
+			  			</li>
+			  		</ul>
+	  			</div>
+
+	  			<div class="col s12 m6">
+		      	<button class="waves-effect waves-light btn red" ng-click="skip()">{{'btn.skip'|trans}}</button>
+		      </div>
+
+		      <div class="col s12 m6">
+		      	<button class="waves-effect waves-light btn green" ng-click="saveQuestion(course)">{{'btn.confirm'|trans}}</button>
+		      </div>
+
 		  	</fieldset>
 		  </form>
 
 	  </section>
 
- 		<section class="col s8" ng-show="create">
+	  <section class="col s8" ng-show="create.succes">
+	  <h2 class="red-text">{[{create.message}]}</h2>
+		</section>
+
+ 		<section class="col s8" ng-show="create&&!create.succes">
 	  	{# load content from API #}
 	  	<h2>Course creation</h2>
 
@@ -70,22 +101,20 @@
 
 	  	<div class="col s12">
 	  		<h5 class="col s12 m6">Questions</h5> 
-	  		<button ng-click="addQuestion()" type="button" class="col s12 m6 waves-effect waves-light btn green">Add new question</button>
+	  		<button ng-click="add('questions', key)" type="button" class="col s12 m6 waves-effect waves-light btn green">Add new question</button>
 	  	</div>
 
 	  	<form ng-repeat="(key, data) in create.questions">
-	  		<p ng-bind="data|json"></p>
-
 				<div class="col s12">
-					<h5 class="col s12 m4">{[{data.title}]}</h5> 
-					<button ng-hide="data.hide" ng-click="data.hide=true" type="button" class="col s12 m4 waves-effect waves-light btn grey">Hide</button>
+					<h5 class="col s12 m4">{[{data.title}]} - {[{data.type}]}</h5>
+					<button ng-hide="data.hide" ng-click="data.hide=true" type="button" class="col s12 m4 waves-effect waves-light btn gr}]}ey">Hide</button>
 					<button ng-hide="!data.hide" ng-click="data.hide=false" type="button" class="col s12 m4 waves-effect waves-light btn green">Show</button>
-					<button ng-click="removeQuestion($index)" type="button" class="col s12 m4 waves-effect waves-light btn red">Remove</button>
+					<button ng-click="remove($index, 'questions', key)" type="button" class="col s12 m4 waves-effect waves-light btn red">Remove</button>
 		  	</div>
 
 			  <div ng-hide="data.hide">
 			  	<div class="col s12">
-			  		<h5 class="col s12 m4">Question title</h5> 
+			  		<h5 class="col s12 m4">Title</h5> 
 					<textarea ng-model="data.title"></textarea>
 			  	</div>
 
@@ -94,56 +123,82 @@
 						<textarea ng-model="data.question"></textarea>
 			  	</div>
 
-			  	<div class="col s12">
-				  	<button type="button" class="waves-effect waves-light btn">Add choose question</button>
+					<ul class="col s12">
+						<li class="col s12 m4">Type</li>
+						<li ng-repeat="(typeKey, type) in data.types" class="col s12 m4">
+					    <input ng-change="change(data.type, key)" ng-model="data.type" type="radio" id="{[{type.type}]}-{[{key}]}" ng-value="{[{typeKey}]}"/>
+					    <label for="{[{type.type}]}-{[{key}]}">{[{type.type}]}</label>
+						</li>
+					</ul>
 
-						<fieldset ng-repeat="choose in data.chooses" class="col s12">
-							<input class="col s12 m6" ng-model="choose.answer">
-					  	<button type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
-				  	</fieldset>
-			  	</div>
-
-			  	<div class="col s12">
+					<div class="col s12">
 						<h5>Answer</h5>
 						<textarea ng-model="data.answer"></textarea>
 			  	</div>
 
-			  	<div class="col s12">
-				  	<button type="button" class="waves-effect waves-light btn">Add Answer Pattern</button>
+			  	<div ng-show="data.type==1||data.type==3||data.type==5||data.type==7||data.type==9" class="col s12">
+				  	<button ng-click="add('chooses', key)" type="button" class="waves-effect waves-light btn">Add choose question</button>
 
-						<fieldset ng-repeat="pattern in data.patterns" class="col s12">
-							<textarea class="col s12 m6" ng-model="pattern.answer"></textarea>
-					  	<button type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
+						<fieldset ng-repeat="choose in data.chooses" class="col s12">
+							<input class="col s12 m6" ng-model="choose.answer">
+					  	<button ng-click="remove($index, 'chooses', key)" type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
 				  	</fieldset>
 			  	</div>
 
-			  	<div class="col s12">
-				    <div class="col s12 m6 file-field input-field">
+			  	<div ng-show="data.type==0||data.type==2||data.type==4||data.type==6||data.type==8" class="col s12">
+				  	<div class="col s12">
+					  	<button ng-click="add('patterns', key)" type="button" class="waves-effect waves-light btn">Add Answer Pattern</button>
+
+							<fieldset ng-repeat="pattern in data.patterns" class="col s12">
+								<textarea class="col s12 m6" ng-model="pattern.answer"></textarea>
+						  	<button ng-click="remove($index, 'patterns', key)" type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
+					  	</fieldset>
+				  	</div>
+			  	</div>
+
+		  	  <div ng-show="data.type==6||data.type==7||data.type==8||data.type==9"
+		  	  	  class="col s12" 
+		  	  	  flow-init
+				      flow-name="uploader.flow"
+				      flow-files-added="processFiles($files, key)">
+
+				    <div class="col s12 file-field input-field">
 				      <div class="btn">
 				        <span>File</span>
-				        <input type="file">
+				        <input flow-btn type="file">
 				      </div>
 				      <div class="file-path-wrapper">
-				        <input class="file-path validate" type="text">
+				        <input ng-model="data.images[0].name" class="file-path" type="text">
 				      </div>
 				    </div>
 
-					  <button type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
-			  	</div>
+						<fieldset ng-hide="true" ng-repeat="image in uploader.flow.files track by $index">
+					    <img flow-img="image"/>
+				    </fieldset>
 
-		  		<ul class="col s12">
+				    <fieldset ng-repeat="image in data.images">
+				    	<button ng-click="remove($index, 'images', key)" type="button" class="col s12 m6 waves-effect waves-light btn red">Remove</button>
+
+				    	<img ng-src="{[{image.base64}]}"/>
+    				</fieldset>
+				  </div>
+
+		  		<ul ng-show="data.type==0||data.type==1||data.type==4||data.type==5||data.type==8||data.type==9"
+		  		class="col s12">
 		  			<li class="col s12 m4">Sound</li>
 		  			<li class="col s12 m4">
-				      <input ng-model="data.sound" type="radio" id="radio-{[{key}]}-true" value="true"/>
+				      <input ng-model="data.sound" type="radio" id="radio-{[{key}]}-true" ng-value="true"/>
 				      <label for="radio-{[{key}]}-true">Yes</label>
 						</li>
 			      <li class="col s12 m4">
-				      <input ng-model="data.sound" type="radio" id="radio-{[{key}]}-false" value="false" checked="checked" />
+				      <input ng-model="data.sound" type="radio" id="radio-{[{key}]}-false" ng-value="false"/>
 				      <label for="radio-{[{key}]}-false">No</label>
 				    </li>
 		      </ul>
 		    </div>
 			</form>
+
+			<button ng-click="save()" class="col s12 btn waves-effect waves-light orange" type="text">Submit</button>
 
 	  </section>
 

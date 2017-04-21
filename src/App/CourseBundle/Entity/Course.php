@@ -2,6 +2,8 @@
 
 namespace App\CourseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Course
  */
@@ -18,17 +20,18 @@ class Course
   private $name;
 
   /**
-   * @var Course
-   */
-  private $score;
-
-  /**
    * @var ArrayCollection
    */
   private $questions;
 
+  /**
+   * @var ArrayCollection
+   */
+  private $usercourses;
+
   public function __construct() {
     $this->questions = new ArrayCollection();
+    $this->usercourses = new ArrayCollection();
   }
 
   /**
@@ -65,26 +68,14 @@ class Course
     return $this->name;
   }
 
-  /**
-   * Get Score
+    /**
+   * Get questions
    *
-   * @return ArrayCollection
+   * @return Questions
    */
-  public function getScore () {
-      return $this->score;
-  }
-
-  /**
-   * Set Score
-   *
-   * @param ArrayCollection $score Score instance
-   *
-   * @return Node
-   */
-  public function setScore ($score) {
-      $this->score = $score;
-
-      return $this;
+  public function getQuestions()
+  {
+    return $this->questions;
   }
 
 }

@@ -2,6 +2,8 @@
 
 namespace App\CourseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
 * Choose
 */
@@ -91,7 +93,7 @@ class Choose
    *
    * @return Question
    */
-  public function setSound($status)
+  public function setStatus($status)
   {
     $this->status = $status;
 
@@ -103,7 +105,7 @@ class Choose
    *
    * @return int
    */
-  public function getSound()
+  public function getStatus()
   {
     return $this->status;
   }

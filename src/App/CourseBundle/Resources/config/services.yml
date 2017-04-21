@@ -4,16 +4,25 @@ parameters:
   question.repository.class: 'App\CourseBundle\Repository\QuestionRepository'
   choose.repository.class: 'App\CourseBundle\Repository\ChooseRepository'
   score.repository.class: 'App\CourseBundle\Repository\ScoreRepository'
+  pattern.repository.class: 'App\CourseBundle\Repository\PatternRepository'
+  image.repository.class: 'App\CourseBundle\Repository\ImageRepository'
+  usercourse.repository.class: 'App\CourseBundle\Repository\UserCourseRepository'
   #Repositories entity
   course.repository.entity: 'App\CourseBundle\Entity\Course'
   question.repository.entity: 'App\CourseBundle\Entity\Question'
   choose.repository.entity: 'App\CourseBundle\Entity\Choose'
   score.repository.entity: 'App\CourseBundle\Entity\Score'
+  pattern.repository.entity: 'App\CourseBundle\Entity\Pattern'
+  image.repository.entity: 'App\CourseBundle\Entity\Image'
+  usercourse.repository.entity: 'App\CourseBundle\Entity\UserCourse'
   #Services classes
   course.service.class: 'App\CourseBundle\Services\CourseService'
   question.service.class: 'App\CourseBundle\Services\QuestionService'
   choose.service.class: 'App\CourseBundle\Services\ChooseService'
   score.service.class: 'App\CourseBundle\Services\ScoreService'
+  pattern.service.class: 'App\CourseBundle\Services\PatternService'
+  image.service.class: 'App\CourseBundle\Services\ImageService'
+  usercourse.service.class: 'App\CourseBundle\Services\UserCourseService'
   #Forms classes
   question.form.class: 'App\CourseBundle\Form\Type\questionType'  
 services:
@@ -38,6 +47,21 @@ services:
     public: false
     factory: ["@doctrine.orm.entity_manager", getRepository]
     arguments: ['%score.repository.entity%']
+  pattern.repository:
+    class: '%pattern.repository.class%'
+    public: false
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%pattern.repository.entity%']
+  image.repository:
+    class: '%image.repository.class%'
+    public: false
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%image.repository.entity%']
+  usercourse.repository:
+    class: '%usercourse.repository.class%'
+    public: false
+    factory: ["@doctrine.orm.entity_manager", getRepository]
+    arguments: ['%usercourse.repository.entity%']
   #Services
   course.service:
     class: '%course.service.class%'
@@ -54,6 +78,18 @@ services:
   score.service:
     class: '%score.service.class%'
     arguments: ['@score.repository']
+    scope: request
+  pattern.service:
+    class: '%pattern.service.class%'
+    arguments: ['@pattern.repository']
+    scope: request
+  image.service:
+    class: '%image.service.class%'
+    arguments: ['@image.repository']
+    scope: request
+  usercourse.service:
+    class: '%usercourse.service.class%'
+    arguments: ['@usercourse.repository']
     scope: request
   #Forms
   question.form:

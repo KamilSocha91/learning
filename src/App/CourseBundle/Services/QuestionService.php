@@ -28,34 +28,23 @@ class QuestionService  {
   }
 
   /**
+   * Return patterns list
+   *
+   * @return patterns|null
+   */
+  public function getPatterns($id = null) {
+      $query = $this->questionRepository->findPatternsById($id);
+
+      return $query->getArrayResult();
+  }
+
+  /**
    * Return chooses list
    *
    * @return choose|null
    */
   public function getChooses($id = null) {
       $query = $this->questionRepository->findChoosesById($id);
-
-      return $query->getArrayResult();
-  }
-
-  /**
-   * Return image
-   *
-   * @return image|null
-   */
-  public function getImage($id = null) {
-      $query = $this->questionRepository->findImageById($id);
-
-      return $query->getArrayResult();
-  }
-
-  /**
-   * Return image
-   *
-   * @return image|null
-   */
-  public function getBoth($id = null) {
-      $query = $this->questionRepository->findBothById($id);
 
       return $query->getArrayResult();
   }
@@ -105,6 +94,21 @@ class QuestionService  {
     $query = $this->questionRepository->findById($id);
 
     return $query->getArrayResult();
+  }
+
+    /**
+   * Save entity
+   *
+   * @param array   $result Request data
+   *
+   * @return void
+   *
+   * @throws \Exception
+   */
+  public function save($data, $course) {
+    $question = $this->questionRepository->save($data, $course);
+
+    return $question;
   }
 
 }

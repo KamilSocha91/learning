@@ -5,9 +5,9 @@ namespace App\CourseBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
-* Image
-*/
-class Image
+ * Pattern
+ */
+class Pattern
 {
   /**
    * @var int
@@ -15,14 +15,14 @@ class Image
   private $id;
 
   /**
-   * @var Question
-   */
-  private $question;
-
-  /**
    * @var string
    */
-  private $base64;
+  private $answer;
+
+  /**
+   * @var Pattern
+   */
+  private $question;
 
   /**
    * Get id
@@ -35,29 +35,28 @@ class Image
   }
 
   /**
-   * Set base64
+   * Set answer
    *
-   * @param string $base64
+   * @param string $answer
    *
-   * @return Image
+   * @return Pattern
    */
-  public function setBase64($base64)
+  public function setAnswer($answer)
   {
-    $this->base64 = $base64;
+      $this->answer = $answer;
 
-    return $this;
+      return $this;
   }
 
   /**
-   * Get base64
+   * Get answer
    *
    * @return string
    */
-  public function getBase64()
+  public function getAnswer()
   {
-    return $this->base64;
+      return $this->answer;
   }
-
 
   /**
    * Get Question
@@ -73,13 +72,13 @@ class Image
    *
    * @param ArrayCollection $question Question instance
    *
-   * @return Image
+   * @return Sound
    */
   public function setQuestion ($question) {
       $this->question = $question;
 
       return $this;
   }
-
+  
 }
 

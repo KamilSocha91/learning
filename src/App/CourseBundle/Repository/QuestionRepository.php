@@ -1,6 +1,10 @@
 <?php
 namespace App\CourseBundle\Repository;
 
+use App\CourseBundle\Entity\Question;
+use App\CourseBundle\Entity\Image;
+use App\CourseBundle\Entity\Choose;
+use App\CourseBundle\Entity\Pattern;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityRepository;
 use DoctrineExtensions\Query\Mysql;
@@ -13,6 +17,27 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 * repository methods below.
 */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository {
+
+  /**
+   * @param array   $nodes Request data
+   */
+  public function save($data, $course) {
+      $question = new Question();
+      $question->setCourse($course);
+      $question->setType($data["type"]);
+      $question->setTitle($data["title"]);
+      $question->setAnswer($data["answer"]);
+      $question->setDifficulty($data["difficulty"]);
+      $question->setQuestion($data["question"]);
+      $question->setChoose($data["choose"]);
+      $question->setImage($data["image"]);
+      $question->setSound($data["sound"]);
+
+      $this->_em->persist($question);
+      $this->_em->flush();
+
+      return $question;
+  }
 
   /**
   * @param integer $id Course id
@@ -124,7 +149,7 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository {
   *
   * @return \Doctrine\ORM\QueryBuilder
   */
-  public function findImageById($id = null) {
+  public function findPatternsById($id = null) {
     if ($id == null) {
       throw new BadRequestHttpException("No id provided");
     }
@@ -132,29 +157,8 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository {
     $query = $this->findSimpleQuestion('q')
       ->andWhere('q.id = :id')
       ->setParameter(':id', $id)
-      ->leftJoin('q.images', 'images')
-      ->addSelect('images');
-
-    return $query->getQuery();
-  }
-
-  /**
-  * Return QueryBuilder
-  *
-  * @return \Doctrine\ORM\QueryBuilder
-  */
-  public function findBothById($id = null) {
-    if ($id == null) {
-      throw new BadRequestHttpException("No id provided");
-    }
-
-    $query = $this->findSimpleQuestion('q')
-      ->andWhere('q.id = :id')
-      ->setParameter(':id', $id)
-      ->leftJoin('q.images', 'images')
-      ->addSelect('images')
-      ->leftJoin('q.chooses', 'chooses')
-      ->addSelect('chooses');
+      ->leftJoin('q.patterns', 'patterns')
+      ->addSelect('patterns');
 
     return $query->getQuery();
   }

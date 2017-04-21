@@ -7,6 +7,10 @@ App\UsersBundle\Entity\User:
     score:
       targetEntity: App\CourseBundle\Entity\Score
       mappedBy: user
+    usercourses:
+      targetEntity: App\CourseBundle\Entity\UserCourse
+      mappedBy: user
+
   id:
     id:
       type: integer
@@ -22,4 +26,6 @@ App\UsersBundle\Entity\User:
       type: string
       length: 255
       nullable: true
+    admin:
+      type: boolean
   lifecycleCallbacks: {  }

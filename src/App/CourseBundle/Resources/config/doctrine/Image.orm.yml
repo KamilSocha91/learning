@@ -20,4 +20,5 @@ App\CourseBundle\Entity\Image:
   fields:
     base64:
       type: string 
+      length: 20000
   lifecycleCallbacks: {  }

@@ -77,6 +77,9 @@ class RegistrationController extends Controller
 
                 $dispatcher->dispatch(FOSUserEvents::REGISTRATION_COMPLETED, new FilterUserResponseEvent($user, $request, $response));
 
+                $this->get('doctrine');
+                $course = $this->get('score.service')->save($user);
+
                 return $response;
             }
 
@@ -162,6 +165,7 @@ class RegistrationController extends Controller
     public function confirmedAction()
     {
         $user = $this->getUser();
+        dump($user);
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }

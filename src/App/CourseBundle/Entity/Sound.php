@@ -2,6 +2,8 @@
 
 namespace App\CourseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
 * Sound
 */

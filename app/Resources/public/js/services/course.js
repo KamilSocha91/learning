@@ -8,39 +8,66 @@ define(['./module'], function (services) {
         });
       };
 
+      this.save = function (data) {
+        return  $http({
+          method: 'POST',
+          url: Routing.generate('create'),
+          data: data,
+          dataType: "json"
+        });
+      }
+
       this.create = function () {
         return  {
+          'succes': false,
+          'message': '',
           'name': 'course name',
           'questions': [
             {
               'hide': false,
-              'type': 'type',
+              'type': 0,
               'title': 'question title',
               'answer': 'answer',
-              'difficulty': 'difficulty',
+              'difficulty': 1,
               'question': 'question',
               'choose': false,
               'image': false,
-              'sound': false,
-              'patterns': [
+              'sound': true,
+              'types': [              
                 {
-                  'answer': 'another valid answer'
+                  'type': 'sound+text=text'
                 },
                 {
-                  'answer': 'another valid answer'
+                  'type': 'sound+text=checkbox'
+                },
+                {
+                  'type': 'text=text'
+                },
+                {
+                  'type': 'text=checkbox'
+                },
+                {
+                  'type': 'sound=text'
+                },
+                {
+                  'type': 'sound=checkbox'
+                },
+                {
+                  'type': 'image=text'
+                },
+                {
+                  'type': 'image=checkbox'
+                },
+                {
+                  'type': 'image+sound=text'
+                },
+                {
+                  'type': 'image+sound=checkbox'
                 }
               ],
-              'images': [{}],
-              'chooses': [
-                {
-                  'answer': 'choose 1',
-                  'status': false
-                },
-                {
-                  'answer': 'choose 2',
-                  'status': false
-                }
-              ]
+              'patterns': [],
+              'images': [],
+              'chooses': []
             }
           ]
         };
@@ -49,34 +76,63 @@ define(['./module'], function (services) {
       this.add = function () {
         return {
           'hide': false,
-          'type': 'type',
+          'type': 0,
           'title': 'New question title',
           'answer': 'answer',
-          'difficulty': 'difficulty',
+          'difficulty': 1,
           'question': 'New question',
           'choose': false,
           'image': false,
-          'sound': false,
-          'patterns': [
+          'sound': true,
+          'types': [              
             {
-              'answer': 'another valid answer'
+              'type': 'sound+text=text'
             },
             {
-              'answer': 'another valid answer'
+              'type': 'sound+text=checkbox'
+            },
+            {
+              'type': 'text=text'
+            },
+            {
+              'type': 'text=checkbox'
+            },
+            {
+              'type': 'sound=text'
+            },
+            {
+              'type': 'sound=checkbox'
+            },
+            {
+              'type': 'image=text'
+            },
+            {
+              'type': 'image=checkbox'
+            },
+            {
+              'type': 'image+sound=text'
+            },
+            {
+              'type': 'image+sound=checkbox'
             }
           ],
-          'images': [{}],
-          'chooses': [
-            {
-              'answer': 'choose 1',
-              'status': false
-            },
-            {
-              'answer': 'choose 2',
-              'status': false
-            }
-          ]
+          'patterns': [],
+          'images': [],
+          'chooses': []
         };
+      };
+
+      this.pattern = function () {
+        return {
+          'answer': 'another valid answer'
+        }
+      };
+      
+      this.choose = function () {
+        return {
+          'answer': 'new choose question',
+          'status': false
+        }
       };
 
     });

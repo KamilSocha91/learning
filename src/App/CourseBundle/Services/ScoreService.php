@@ -36,9 +36,50 @@ class ScoreService  {
    * @throws \Exception
    */
   public function getById($id = null) {
-    $query = $this->scoreRepository->findById($id);
+    $query = $this->scoreRepository->findUserById($id);
 
     return $query->getArrayResult();
+  }
+
+    /**
+   * Return score
+   *
+   * @param integer $id Score id
+   *
+   * @return Score|null
+   *
+   * @throws \Exception
+   */
+  public function getObjectById($id = null) {
+    $query = $this->scoreRepository->findById($id);
+
+    return $query->getResult();
+  }
+
+  /**
+   * Save entity
+   *
+   * @param array   $result Request data
+   *
+   * @return void
+   *
+   * @throws \Exception
+   */
+  public function save($user) {
+    $this->scoreRepository->save($user);
+  }
+
+  /**
+   * Save entity
+   *
+   * @param array   $result Request data
+   *
+   * @return void
+   *
+   * @throws \Exception
+   */
+  public function update($score, $query) {
+    $this->scoreRepository->update($score, $query);
   }
 
 }

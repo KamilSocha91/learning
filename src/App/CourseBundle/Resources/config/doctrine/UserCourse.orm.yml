@@ -1,0 +1,26 @@
+App\CourseBundle\Entity\UserCourse:
+  type: entity
+  table: usercourse
+  repositoryClass: App\CourseBundle\Repository\UserCourseRepository
+
+  manyToOne:
+    user:
+      targetEntity: App\UsersBundle\Entity\User
+      inversedBy: usercourses
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+    course:
+      targetEntity: App\CourseBundle\Entity\Course
+      inversedBy: usercourses
+      joinColumn:
+        name: course_id
+        referencedColumnName: id
+
+  id:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+  lifecycleCallbacks: {  }

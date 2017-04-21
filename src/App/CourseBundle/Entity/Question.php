@@ -2,6 +2,8 @@
 
 namespace App\CourseBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Question
  */
@@ -70,12 +72,18 @@ class Question
   /**
    * @var ArrayCollection
    */
+  private $patterns;
+  
+  /**
+   * @var ArrayCollection
+   */
   private $sounds;
 
   public function __construct() {
     $this->chooses = new ArrayCollection();
     $this->images = new ArrayCollection();
     $this->sounds = new ArrayCollection();
+    $this->patterns = new ArrayCollection();
   }
 
 	/**

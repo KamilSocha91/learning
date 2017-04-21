@@ -27,15 +27,26 @@ class User extends BaseUser
    * @var string
    */
   private $lastName;
-    
+
+  /**
+   * @var boolean
+   */
+  private $admin = false;
+
   /**
    * @var ArrayCollection
    */
   private $score;
 
+  /**
+   * @var ArrayCollection
+   */
+  private $usercourses;
+
   public function __construct() {
     parent::__construct();
     $this->score = new \Doctrine\Common\Collections\ArrayCollection();
+    $this->usercourses = new \Doctrine\Common\Collections\ArrayCollection();
   }
 
   /**
@@ -71,12 +82,53 @@ class User extends BaseUser
   }
 
   /**
+  * @return Score
+  */
+  public function getScore() {
+    return $this->score;
+  }
+
+  /**
   * @param mixed $lastName Last name
   *
   * @return User
   */
   public function setLastName($lastName) {
     $this->lastName = $lastName;
+  }
+
+    /**
+   * Set admin
+   *
+   * @param integer $admin
+   *
+   * @return Question
+   */
+  public function setAdmin($admin)
+  {
+    $this->admin = $admin;
+
+    return $this;
+  }
+
+  /**
+   * Get admin
+   *
+   * @return int
+   */
+  public function getAdmin()
+  {
+    return $this->admin;
+  }
+
+  /**
+   * Get username
+   *
+   * @return int
+   */
+  public function getUserName()
+  {
+    return $this->username;
   }
 
 }
